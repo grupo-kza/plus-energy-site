@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LeadPopup } from "@/components/lead/LeadPopup";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { CookieBanner } from "@/components/ui/CookieBanner";
 import "./globals.css";
 
 const GTM_ID = "GTM-PDW865DV";
@@ -79,6 +80,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={`${sora.variable} ${dmSans.variable}`}>
+      {/* Consent Mode v2: começa negado e só libera quando a pessoa aceita no banner. Roda antes do GTM. */}
+      <Script
+        id="consent-default"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+var c='denied';try{c=localStorage.getItem('pe_consent')==='granted'?'granted':'denied';}catch(e){}
+gtag('consent','default',{ad_storage:c,ad_user_data:c,ad_personalization:c,analytics_storage:c,functionality_storage:'granted',security_storage:'granted',wait_for_update:500});`,
+        }}
+      />
       <Script
         id="gtm-script"
         strategy="afterInteractive"
@@ -103,6 +114,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <main className="flex-1">{children}</main>
         <Footer />
         <LeadPopup />
+        <CookieBanner />
         <WhatsAppButton />
       </body>
     </html>

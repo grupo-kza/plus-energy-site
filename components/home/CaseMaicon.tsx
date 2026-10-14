@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { CASES } from "@/lib/constants";
+import { CASES, calculateSavings } from "@/lib/constants";
 import { formatCurrency } from "@/lib/utils";
 import { MapPin, Quote, Star, TrendingDown } from "lucide-react";
 import { motion } from "framer-motion";
@@ -10,6 +10,7 @@ type Case = (typeof CASES)[number];
 
 /* ─── Featured card (Maicon) ─────────────────────────────────────── */
 function FeaturedCard({ c }: { c: Case }) {
+  const estimate = calculateSavings(c.bill);
   return (
     <div className="rounded-2xl overflow-hidden border border-pe-slate-100 shadow-[0_4px_24px_rgb(0_0_0/0.08)] h-full">
       <div className="grid sm:grid-cols-2 h-full">
@@ -32,17 +33,19 @@ function FeaturedCard({ c }: { c: Case }) {
 
           <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 p-3.5 rounded-xl bg-pe-slate-50 mb-3.5">
             <div className="text-center">
-              <p className="text-[10px] text-pe-slate-400 uppercase tracking-wide mb-0.5">Antes</p>
-              <p className="font-heading text-base sm:text-lg font-bold text-pe-slate-400 line-through">{formatCurrency(c.previousBill)}</p>
+              <p className="text-[10px] text-pe-slate-400 uppercase tracking-wide mb-0.5">Conta média</p>
+              <p className="font-heading text-base sm:text-lg font-bold text-pe-slate-500">{formatCurrency(c.bill)}</p>
             </div>
             <TrendingDown className="w-5 h-5 text-pe-solar-500 shrink-0" />
             <div className="text-center">
-              <p className="text-[10px] text-pe-green-600 uppercase tracking-wide mb-0.5 font-semibold">Agora</p>
-              <p className="font-heading text-base sm:text-lg font-bold text-pe-green-600">{formatCurrency(c.currentBill)}</p>
+              <p className="text-[10px] text-pe-green-600 uppercase tracking-wide mb-0.5 font-semibold">Desconto estimado</p>
+              <p className="font-heading text-base sm:text-lg font-bold text-pe-green-600">~{formatCurrency(estimate.monthly)}/mês</p>
             </div>
           </div>
 
-          <p className="text-[11px] text-pe-slate-500 mb-4">Conta de um mês, antes e depois da Plus Energy.</p>
+          <p className="text-[11px] text-pe-slate-500 mb-4">
+            Estimativa pela régua da Plus: {estimate.ratePercent}% sobre ~{formatCurrency(estimate.compensated)} de energia compensada. O valor de cada mês muda com o consumo e a bandeira.
+          </p>
 
           <div className="text-center sm:text-left">
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-pe-green-50 border border-pe-green-100 text-xs font-semibold text-pe-green-700">
@@ -67,7 +70,7 @@ function FeaturedCard({ c }: { c: Case }) {
             <p className="mt-4 text-xs text-pe-solar-400/70">{c.name}, {c.company}</p>
           </div>
           <div className="relative z-10 mt-6 pt-5 border-t border-white/10">
-            <p className="text-[10px] text-white/40 uppercase tracking-widest mb-1">Economizado em {c.months} meses</p>
+            <p className="text-[10px] text-white/40 uppercase tracking-widest mb-1">Economia que ele contou, em {c.months} meses</p>
             <p className="font-heading text-3xl font-extrabold text-pe-solar-400 drop-shadow-[0_0_20px_rgb(230_169_0/0.4)]">
               {formatCurrency(c.totalSavings)}
             </p>

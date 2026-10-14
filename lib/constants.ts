@@ -23,9 +23,9 @@ export const MIN_BILL = 300;
 export const MAX_BILL = 5000;
 export const DEFAULT_BILL = 500;
 export const TIER_LIMIT = 400;
-// Mesmo corte do formulário nativo do Meta ("Até R$400" é a faixa que não segue).
-// Abaixo disso o funil do site não chega ao WhatsApp: decisão de 2026-08-08.
-export const MIN_QUALIFIED_BILL = 400;
+// Abaixo disso o funil do site não chega ao WhatsApp. Era R$ 400 (08/08/2026);
+// o Lucas abriu para R$ 300 em 14/10/2026 (decisão 2efe03a5-424), igual à régua.
+export const MIN_QUALIFIED_BILL = MIN_BILL;
 
 export function discountRateFor(billValue: number) {
   return billValue > TIER_LIMIT ? 0.25 : 0.2;
@@ -117,8 +117,7 @@ export const CASE_MAICON = {
   name: "Maicon",
   company: "Mercado e Açougue RK LTDA",
   location: "Marcelino Ramos, RS",
-  previousBill: 3785.54,
-  currentBill: 2998.90,
+  bill: 3785.54,
   totalSavings: 5677.91,
   months: 8,
   testimonial:
@@ -134,8 +133,8 @@ export const CASES = [
     name: "Maicon R.",
     company: "Mercado e Açougue RK LTDA",
     location: "Marcelino Ramos, RS",
-    previousBill: 3785.54,
-    currentBill: 2998.90,
+    // Conta média informada no site original (sem a fatura anexada). O desconto mostrado sai da régua.
+    bill: 3785.54,
     totalSavings: 5677.91,
     months: 8,
     testimonial: "Muito contente com nossa parceria que já conseguimos economizar R$5.677,91 em 8 meses!! Grato pela confiança.",
@@ -160,7 +159,7 @@ export const FAQ_DATA = [
   {
     question: "Tem multa para cancelar?",
     answer:
-      "Não tem multa para sair. Para cancelar, é só avisar com 90 dias de antecedência.",
+      "Não tem multa para sair. O contrato é de 3 meses e renova sozinho; para cancelar, é só avisar com 90 dias de antecedência.",
   },
   {
     question: "Em quanto tempo o desconto aparece?",

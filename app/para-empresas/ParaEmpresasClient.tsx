@@ -73,7 +73,7 @@ const cases = [
     segment: "Supermercado",
     location: "Marcelino Ramos/RS",
     before: "R$ 3.785",
-    after: "R$ 2.999",
+    after: "~R$ 629/mês",
     saving: "R$ 5.677",
     period: "8 meses",
     quote: "Muito contente com nossa parceria que já conseguimos economizar R$5.677,91 em 8 meses!! Grato pela confiança.",
@@ -95,7 +95,7 @@ const faqItems = [
   },
   {
     question: "Tem multa de cancelamento?",
-    answer: "Não. Pode cancelar sem multa. É só avisar com 90 dias de antecedência.",
+    answer: "Não. O contrato é de 3 meses e renova sozinho. Pode cancelar sem multa, é só avisar com 90 dias de antecedência.",
   },
   {
     question: "Como funciona a cobrança?",
@@ -395,17 +395,17 @@ export function ParaEmpresasClient() {
 
                 <div className="bg-white rounded-xl border border-pe-slate-100 p-4 grid grid-cols-2 gap-3 mt-auto">
                   <div>
-                    <p className="text-[10px] text-pe-slate-400 uppercase tracking-wider">Antes</p>
+                    <p className="text-[10px] text-pe-slate-400 uppercase tracking-wider">Conta média</p>
                     <p className="font-heading font-bold text-pe-slate-600">{c.before}</p>
                   </div>
                   <div>
-                    <p className="text-[10px] text-pe-slate-400 uppercase tracking-wider">Depois</p>
+                    <p className="text-[10px] text-pe-slate-400 uppercase tracking-wider">Desconto estimado</p>
                     <p className="font-heading font-bold text-pe-green-600">{c.after}</p>
                   </div>
                   <div className="col-span-2 pt-2 border-t border-pe-slate-100 flex items-center gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-pe-green-600 shrink-0" />
                     <p className="text-xs text-pe-slate-600">
-                      <strong className="text-pe-green-700">{c.saving}</strong> economizados em {c.period}
+                      <strong className="text-pe-green-700">{c.saving}</strong> economizados em {c.period}, pelo relato dele
                     </p>
                   </div>
                 </div>
