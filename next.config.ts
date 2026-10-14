@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // Páginas de venda (F9): /lp/<angulo> serve public/lp/<angulo>.html
+  async rewrites() {
+    return [{ source: "/lp/:slug", destination: "/lp/:slug.html" }];
+  },
   images: {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
