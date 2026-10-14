@@ -3,14 +3,13 @@
 import { motion } from "framer-motion";
 import { ShieldCheck, ArrowRight, ChevronDown, Wrench, Ban, Unlock, Smartphone, BadgePercent, Zap } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Counter } from "@/components/ui/Counter";
 
 const tickerItems = [
   { icon: Wrench, text: "Sem instalação" },
   { icon: Ban, text: "Sem taxa de adesão" },
-  { icon: Unlock, text: "Sem fidelidade" },
+  { icon: Unlock, text: "Sem multa para sair" },
   { icon: Smartphone, text: "100% Digital" },
-  { icon: BadgePercent, text: "Até 25% de desconto" },
+  { icon: BadgePercent, text: "Até 25% na energia compensada" },
   { icon: Zap, text: "Ativação em 30-60 dias" },
   { icon: ShieldCheck, text: "Regulamentado ANEEL" },
 ];
@@ -96,9 +95,9 @@ export function Hero() {
               variants={fadeInUp}
               className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl font-extrabold leading-[1.1] text-white"
             >
-              Pague até{" "}
+              Até{" "}
               <span className="animate-shimmer">25%</span>{" "}
-              menos na conta de luz{" "}
+              de desconto na energia da sua conta de luz,{" "}
               <span className="text-pe-solar-400">sem instalar nada</span>
             </motion.h1>
 
@@ -107,8 +106,9 @@ export function Hero() {
               variants={fadeInUp}
               className="mt-6 text-lg md:text-xl text-white/70 max-w-xl leading-relaxed"
             >
-              Energia solar por assinatura. Sem obra, sem taxa de adesão,
-              sem fidelidade. 100% digital.
+              Energia solar por assinatura no RS, para conta RGE ou CPFL. O desconto
+              vale sobre a energia compensada. Sem obra, sem taxa de adesão e sem
+              multa para sair.
             </motion.p>
 
             {/* CTAs */}
@@ -136,21 +136,17 @@ export function Hero() {
             {/* Stats strip — count-up animado */}
             <motion.div custom={5} variants={fadeInUp} className="mt-10 flex items-center gap-8">
               <div className="text-center">
-                <p className="font-heading text-2xl font-extrabold text-pe-solar-400">
-                  <Counter end={25} suffix="%" duration={1800} className="font-heading text-2xl font-extrabold text-pe-solar-400" />
-                </p>
-                <p className="text-xs text-white/50 uppercase tracking-wide mt-0.5">de desconto</p>
+                <p className="font-heading text-2xl font-extrabold text-pe-solar-400">até 25%</p>
+                <p className="text-xs text-white/50 uppercase tracking-wide mt-0.5">na energia compensada</p>
               </div>
               <div className="w-px h-8 bg-white/15" />
               <div className="text-center">
                 <p className="font-heading text-2xl font-extrabold text-pe-solar-400">R$ 0</p>
-                <p className="text-xs text-white/50 uppercase tracking-wide mt-0.5">de investimento</p>
+                <p className="text-xs text-white/50 uppercase tracking-wide mt-0.5">de adesão</p>
               </div>
               <div className="w-px h-8 bg-white/15" />
               <div className="text-center">
-                <p className="font-heading text-2xl font-extrabold text-pe-solar-400">
-                  <Counter end={100} suffix="%" duration={1600} className="font-heading text-2xl font-extrabold text-pe-solar-400" />
-                </p>
+                <p className="font-heading text-2xl font-extrabold text-pe-solar-400">100%</p>
                 <p className="text-xs text-white/50 uppercase tracking-wide mt-0.5">digital</p>
               </div>
             </motion.div>

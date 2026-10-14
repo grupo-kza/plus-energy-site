@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s | Plus Energy",
   },
   description:
-    "Pague até 25% menos na conta de luz sem instalar nada. Energia solar por assinatura para residências e empresas no RS. Sem obra, sem taxa de adesão, sem fidelidade.",
+    "Até 25% de desconto sobre a energia compensada da conta de luz, sem instalar nada. Energia solar por assinatura para casas e empresas no RS. Sem obra, sem taxa de adesão e sem multa para sair.",
   keywords: [
     "energia solar por assinatura",
     "desconto conta de luz",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     siteName: "Plus Energy",
     title: "Plus Energy — Até 25% de Desconto na Conta de Luz",
     description:
-      "Energia solar por assinatura. Sem instalar nada, sem taxa, sem fidelidade. 100% digital.",
+      "Energia solar por assinatura. Sem instalar nada, sem taxa de adesão e sem multa para sair. 100% digital.",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {

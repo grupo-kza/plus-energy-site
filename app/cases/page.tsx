@@ -7,7 +7,7 @@ import { CASES } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Cases — Clientes que Economizam com a Plus Energy",
-  description: "Veja depoimentos e cases reais de clientes que estão economizando até 25% na conta de luz com a Plus Energy no RS.",
+  description: "O caso do Mercado e Açougue RK, em Marcelino Ramos, cliente da Plus Energy no RS.",
 };
 
 export default function CasesPage() {

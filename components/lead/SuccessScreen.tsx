@@ -48,13 +48,13 @@ export function SuccessScreen({ billValue, onClose }: SuccessScreenProps) {
 
       {/* Savings reminder */}
       <div className="p-4 bg-gradient-to-br from-pe-green-50 to-pe-solar-50 rounded-xl border border-pe-green-200 mb-6">
-        <p className="text-sm text-pe-slate-500 mb-1">Sua economia estimada</p>
+        <p className="text-sm text-pe-slate-500 mb-1">Economia estimada, em torno de</p>
         <p className="text-3xl font-heading font-extrabold text-pe-green-700">
           {formatCurrency(savings.monthly)}
           <span className="text-sm font-normal text-pe-slate-500">/mês</span>
         </p>
         <p className="text-xs text-pe-slate-400 mt-1">
-          São {formatCurrency(savings.yearly)} por ano no seu bolso!
+          {savings.ratePercent}% sobre a energia compensada. O valor exato vem na simulação com a sua conta.
         </p>
       </div>
 

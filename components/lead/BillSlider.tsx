@@ -3,7 +3,6 @@
 import { useCallback } from "react";
 import { formatCurrency } from "@/lib/utils";
 import { MIN_BILL, MAX_BILL, calculateSavings } from "@/lib/constants";
-import { Leaf, TreePine, Zap } from "lucide-react";
 
 interface BillSliderProps {
   value: number;
@@ -57,7 +56,7 @@ export function BillSlider({ value, onChange, showDetails = true }: BillSliderPr
         <>
           {/* Savings highlight */}
           <div className="mt-6 p-5 bg-gradient-to-br from-pe-green-50 to-pe-solar-50 rounded-2xl border border-pe-green-200">
-            <p className="text-sm text-pe-slate-600 mb-1">Sua economia mensal estimada</p>
+            <p className="text-sm text-pe-slate-600 mb-1">Economia estimada, em torno de</p>
             <p className="text-4xl font-heading font-extrabold text-pe-green-700">
               {formatCurrency(savings.monthly)}
               <span className="text-base font-normal text-pe-slate-500">/mês</span>
@@ -79,36 +78,10 @@ export function BillSlider({ value, onChange, showDetails = true }: BillSliderPr
             </div>
           </div>
 
-          {/* Environmental impact */}
-          <div className="grid grid-cols-3 gap-3 mt-4">
-            <div className="flex flex-col items-center p-3 rounded-xl bg-pe-green-50/60">
-              <Leaf className="w-5 h-5 text-pe-green-500 mb-1" />
-              <span className="text-sm font-bold text-pe-green-800">
-                {savings.co2YearlyTons} ton
-              </span>
-              <span className="text-[10px] text-pe-slate-500 text-center leading-tight">
-                CO₂ evitado/ano
-              </span>
-            </div>
-            <div className="flex flex-col items-center p-3 rounded-xl bg-pe-green-50/60">
-              <TreePine className="w-5 h-5 text-pe-green-500 mb-1" />
-              <span className="text-sm font-bold text-pe-green-800">
-                {savings.treesEquiv}
-              </span>
-              <span className="text-[10px] text-pe-slate-500 text-center leading-tight">
-                árvores equiv.
-              </span>
-            </div>
-            <div className="flex flex-col items-center p-3 rounded-xl bg-pe-solar-50/60">
-              <Zap className="w-5 h-5 text-pe-solar-500 mb-1" />
-              <span className="text-sm font-bold text-pe-solar-600">
-                {savings.kwhMonthly}
-              </span>
-              <span className="text-[10px] text-pe-slate-500 text-center leading-tight">
-                kWh limpos/mês
-              </span>
-            </div>
-          </div>
+          <p className="mt-3 text-xs text-pe-slate-500 leading-snug">
+            {savings.ratePercent}% sobre a energia compensada (cerca de {formatCurrency(savings.compensated)} da sua conta).
+            O mínimo da ligação, a iluminação pública e os encargos seguem com a RGE.
+          </p>
         </>
       )}
     </div>

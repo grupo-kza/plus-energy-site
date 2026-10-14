@@ -1,7 +1,7 @@
 "use client";
 
 import { formatCurrency } from "@/lib/utils";
-import { calculateSavings, DISCOUNT_RATE } from "@/lib/constants";
+import { calculateSavings } from "@/lib/constants";
 import { TrendingDown, ArrowDown } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -22,7 +22,7 @@ export function DiscountDisplay({ billValue }: DiscountDisplayProps) {
     >
       <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 bg-pe-green-100 text-pe-green-800 rounded-full text-sm font-semibold">
         <TrendingDown className="w-4 h-4" />
-        Desconto de {Math.round(DISCOUNT_RATE * 100)}%
+        {savings.ratePercent}% na energia compensada
       </div>
 
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4 mt-4">
@@ -42,7 +42,7 @@ export function DiscountDisplay({ billValue }: DiscountDisplayProps) {
         {/* After */}
         <div className="text-center min-w-0">
           <p className="text-[10px] sm:text-xs text-pe-green-600 uppercase tracking-wide mb-1 font-semibold">
-            Com Plus Energy
+            Estimativa com Plus Energy
           </p>
           <p className="text-lg sm:text-2xl font-heading font-extrabold text-pe-green-700 truncate">
             {formatCurrency(newBill)}
@@ -52,15 +52,11 @@ export function DiscountDisplay({ billValue }: DiscountDisplayProps) {
 
       <div className="mt-4 p-3 bg-pe-solar-50 rounded-xl border border-pe-solar-200">
         <p className="text-sm text-pe-slate-600">
-          Economia de{" "}
+          Economia em torno de{" "}
           <span className="font-bold text-pe-green-700">
             {formatCurrency(savings.monthly)}/mês
-          </span>{" "}
-          — são{" "}
-          <span className="font-bold text-pe-green-700">
-            {formatCurrency(savings.yearly)}/ano
-          </span>{" "}
-          no seu bolso!
+          </span>
+          . O valor exato sai da simulação com a sua conta.
         </p>
       </div>
     </motion.div>

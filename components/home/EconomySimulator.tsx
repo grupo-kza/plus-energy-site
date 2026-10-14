@@ -4,7 +4,7 @@ import { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DEFAULT_BILL, MIN_BILL, MAX_BILL, calculateSavings } from "@/lib/constants";
 import { formatCurrency } from "@/lib/utils";
-import { ArrowRight, Leaf, TreePine, Zap } from "lucide-react";
+import { ArrowRight, Zap } from "lucide-react";
 import { trackSimulatorInteraction, trackSimulatorAutoTrigger, trackCtaClick } from "@/lib/gtm";
 
 const IDLE_DELAY = 3000;
@@ -140,7 +140,7 @@ export function EconomySimulator() {
             Simule sua <span className="text-pe-solar-400">economia</span>
           </h2>
           <p className="mt-2 text-base text-pe-slate-500">
-            Arraste o slider e veja quanto você pode economizar
+            Arraste e veja uma estimativa. O valor exato sai da simulação com a sua conta.
           </p>
         </motion.div>
 
@@ -223,24 +223,26 @@ export function EconomySimulator() {
               />
             </div>
 
-            {/* Stats */}
+            {/* Como a conta se divide */}
             <div className="grid grid-cols-3 gap-3 w-full">
               {[
-                { icon: Leaf, value: `${savings.co2YearlyTons}t`, label: "CO₂" },
-                { icon: TreePine, value: `${savings.treesEquiv}`, label: "árvores equiv." },
-                { icon: Zap, value: `${savings.kwhMonthly}`, label: "kWh gerado" },
-              ].map(({ icon: Icon, value, label }) => (
+                { value: `${savings.ratePercent}%`, label: "de desconto na energia compensada" },
+                { value: `~${formatCurrency(savings.compensated).replace(",00", "")}`, label: "energia compensada (com desconto)" },
+                { value: `~${formatCurrency(savings.stayWithRge).replace(",00", "")}`, label: "segue com a RGE (mínimo, iluminação, encargos)" },
+              ].map(({ value, label }) => (
                 <div
                   key={label}
                   className="flex flex-col items-center p-3 rounded-xl text-center"
                   style={{ background: "rgba(255,255,255,0.6)", border: "1px solid rgba(0,0,0,0.06)" }}
                 >
-                  <Icon className="w-4 h-4 text-pe-solar-400 mb-1.5" />
-                  <span className="font-heading text-sm font-bold text-black">{value}</span>
-                  <span className="text-[10px] text-pe-slate-400 leading-tight mt-0.5">{label}</span>
+                  <span className="font-heading text-sm font-bold text-black tabular-nums">{value}</span>
+                  <span className="text-[10px] text-pe-slate-500 leading-tight mt-1">{label}</span>
                 </div>
               ))}
             </div>
+            <p className="mt-4 text-[11px] text-pe-slate-500 text-center leading-snug">
+              Contas de R$ 300 a R$ 400: 20%. Acima de R$ 400: 25%.
+            </p>
           </div>
 
           {/* ── Right — savings result ── */}
@@ -256,12 +258,12 @@ export function EconomySimulator() {
 
             <div className="relative z-10">
               <p className="text-xs font-bold text-white/40 uppercase tracking-[0.2em] mb-6">
-                Sua economia estimada
+                Economia estimada
               </p>
 
               {/* Monthly savings hero number */}
               <div className="mb-8">
-                <p className="text-xs text-white/30 uppercase tracking-widest mb-2">por mês</p>
+                <p className="text-xs text-white/50 uppercase tracking-widest mb-2">em torno de, por mês</p>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={savings.monthly}
@@ -279,7 +281,7 @@ export function EconomySimulator() {
                         textShadow: "0 0 40px rgba(230,169,0,0.5)",
                       }}
                     >
-                      {savings.monthly.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                      {savings.monthly.toLocaleString("pt-BR")}
                     </span>
                     <span className="text-white/40 text-base mb-2">/mês</span>
                   </motion.div>
@@ -342,8 +344,8 @@ export function EconomySimulator() {
                   <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                 </span>
               </motion.button>
-              <p className="mt-3 text-center text-xs text-white/25">
-                Simulação gratuita · Sem compromisso · 100% digital
+              <p className="mt-3 text-center text-xs text-white/50 leading-snug">
+                Estimativa. O desconto começa depois que a Plus Energy assume a conta, em 30 a 60 dias.
               </p>
             </div>
           </div>

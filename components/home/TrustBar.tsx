@@ -13,9 +13,9 @@ import {
 const items = [
   { icon: Wrench, text: "Sem instalação" },
   { icon: Ban, text: "Sem taxa de adesão" },
-  { icon: Unlock, text: "Sem fidelidade" },
+  { icon: Unlock, text: "Sem multa para sair" },
   { icon: Smartphone, text: "100% Digital" },
-  { icon: BadgePercent, text: "Até 25% de desconto" },
+  { icon: BadgePercent, text: "Até 25% na energia compensada" },
   { icon: Zap, text: "Ativação em 30-60 dias" },
   { icon: ShieldCheck, text: "Regulamentado ANEEL" },
 ] as const;
