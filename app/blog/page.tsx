@@ -4,7 +4,7 @@ import { getBlogPosts, getBlogCategories } from "@/lib/supabase";
 import { BlogClient } from "@/app/blog/BlogClient";
 
 export const metadata: Metadata = {
-  title: "Blog — Energia Solar e Economia na Conta de Luz",
+  title: "Blog: Energia Solar e Economia na Conta de Luz",
   description:
     "Artigos sobre energia solar por assinatura, geração distribuída, Lei 14.300 e como economizar na conta de luz no RS.",
 };

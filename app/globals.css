@@ -2,7 +2,7 @@
 @plugin "@tailwindcss/typography";
 
 /* ========================================
-   PLUS ENERGY — Design Tokens
+   PLUS ENERGY: Design Tokens
    Paleta: Carvão premium + Ouro metálico
    Tipografia: Sora (headings) + DM Sans (body)
    Brand colors extraídas do LOGO.svg:
@@ -18,7 +18,7 @@
   --pe-green-800: #0d0d0d;   /* dark surface */
   --pe-green-700: #1a1a1a;   /* elevated dark surface */
   --pe-green-600: #2a2a2a;   /* border/divider on dark */
-  --pe-green-500: #E6A900;   /* brand primary gold — kept in "500" slot for highlight usage */
+  --pe-green-500: #E6A900;   /* brand primary gold: kept in "500" slot for highlight usage */
   --pe-green-400: #EBB800;   /* bright brand gold */
   --pe-green-300: #F0CC60;   /* lighter gold tint */
   --pe-green-200: #F5E0A0;   /* pale gold */
@@ -198,7 +198,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ========================================
-   Custom slider styles — gold theme
+   Custom slider styles: gold theme
    ======================================== */
 
 input[type="range"] {
@@ -308,7 +308,7 @@ input[type="range"]::-moz-range-thumb {
 .delay-500 { animation-delay: 500ms; }
 
 /* ========================================
-   Section patterns — dark premium
+   Section patterns: dark premium
    ======================================== */
 
 .section-pattern {

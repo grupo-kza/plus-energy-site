@@ -27,7 +27,7 @@ export function Header() {
 
   return (
     <>
-      {/* Pill header wrapper — floats centered at top */}
+      {/* Pill header wrapper: floats centered at top */}
       <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-3 pb-1 pointer-events-none">
         <header
           className={cn(

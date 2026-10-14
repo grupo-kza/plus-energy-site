@@ -1,5 +1,5 @@
 // ========================================
-// Plus Energy — Roteamento único para o WhatsApp oficial
+// Plus Energy: Roteamento único para o WhatsApp oficial
 // ========================================
 // Todo caminho do site termina no MESMO número (WhatsApp Cloud API / Chatwoot).
 // O lead é sempre quem envia a primeira mensagem: isso abre a janela de 24h
@@ -56,7 +56,7 @@ export function captureUtms(): void {
 /**
  * UTMs da sessão. Lê também a query string atual porque, na primeira
  * renderização depois do clique no anúncio, o `captureUtms` do efeito
- * ainda não rodou — sem isso o primeiro link perderia a campanha.
+ * ainda não rodou; sem isso o primeiro link perderia a campanha.
  */
 export function getUtms(): Record<string, string> {
   if (typeof window === "undefined") return {};
@@ -79,7 +79,7 @@ export function getUtms(): Record<string, string> {
 }
 
 /**
- * Faixa da conta — é o corte de qualificação que o comercial usa
+ * Faixa da conta: é o corte de qualificação que o comercial usa
  * (PF a partir de R$800, PJ/condomínio a partir de R$2.000).
  */
 export function billBucket(billValue?: number): string {
@@ -113,7 +113,7 @@ const OPENERS: Record<WaSegment, (firstName?: string) => string> = {
 };
 
 /**
- * Monta a mensagem que o LEAD envia. Precisa soar como primeira pessoa —
+ * Monta a mensagem que o LEAD envia. Precisa soar como primeira pessoa:
  * quando não sabemos o valor da conta, deixamos a lacuna pro próprio lead
  * preencher: é o filtro de qualificação mais barato que existe.
  */

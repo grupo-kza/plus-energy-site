@@ -39,7 +39,7 @@ export function NotEligibleScreen({ onClose }: NotEligibleScreenProps) {
       <div className="p-4 bg-pe-slate-50 rounded-xl border border-pe-slate-200 mb-6 text-left">
         <p className="text-sm text-pe-slate-600">
           Se sua conta variar bastante ao longo do ano, volte aqui num mês de consumo
-          mais alto — ou acompanhe nosso Instagram, avisamos quando o mínimo mudar.
+          mais alto, ou acompanhe nosso Instagram, avisamos quando o mínimo mudar.
         </p>
       </div>
 

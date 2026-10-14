@@ -4,7 +4,7 @@ import { LeadCta } from "@/components/ui/LeadCta";
 import { ENVIRONMENTAL_STATS } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Sustentabilidade — Impacto Ambiental da Plus Energy",
+  title: "Sustentabilidade: impacto ambiental da Plus Energy",
   description: "Cada kWh gerado pela Plus Energy evita CO₂ na atmosfera. Veja o impacto ambiental real da energia solar por assinatura no RS.",
 };
 

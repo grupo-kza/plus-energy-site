@@ -25,9 +25,9 @@ import { LeadCta } from "@/components/ui/LeadCta";
 /* ── data ── */
 
 const stats = [
-  { value: "+200", label: "empresas atendidas" },
-  { value: "R$ 2M+", label: "economizados no RS" },
-  { value: "25%", label: "de desconto médio" },
+  { value: "25%", label: "sobre a energia compensada" },
+  { value: "R$ 0", label: "de adesão e de obra" },
+  { value: "90 dias", label: "de aviso para sair, sem multa" },
 ];
 
 const segments = [
@@ -50,18 +50,18 @@ const steps = [
     num: 2,
     icon: FileText,
     title: "Assine digital",
-    desc: "Contrato 100% digital, sem burocracia, sem fidelidade. Assinatura em menos de 5 minutos.",
+    desc: "Contrato 100% digital, sem taxa de adesão e sem multa para sair.",
   },
   {
     num: 3,
     icon: PiggyBank,
     title: "Economize todo mês",
-    desc: "O desconto aparece automaticamente na próxima fatura. Sem instalar nada na sua empresa.",
+    desc: "A titularidade passa para a Plus Energy e o desconto começa em 30 a 60 dias. Os primeiros boletos podem vir cheios.",
   },
 ];
 
 const benefits = [
-  { icon: TrendingDown, title: "Até 25% de desconto", desc: "Economia direta na conta CNPJ todo mês, sem custo de instalação." },
+  { icon: TrendingDown, title: "25% sobre a energia compensada", desc: "Na conta CNPJ, todo mês, sem obra. Imposto, iluminação pública e taxas não têm desconto." },
   { icon: Zap, title: "Sem interrupção", desc: "A energia continua vindo da rede RGE normalmente. Nada muda na operação." },
   { icon: Shield, title: "Regulamentado pela ANEEL", desc: "Operamos sob a Lei 14.300/2022. Contrato digital, sem burocracia." },
   { icon: Building2, title: "Ideal para qualquer porte", desc: "Atendemos de pequenos comércios a grandes indústrias com conta RGE." },
@@ -73,30 +73,10 @@ const cases = [
     segment: "Supermercado",
     location: "Marcelino Ramos/RS",
     before: "R$ 3.785",
-    after: "R$ 2.999",
+    after: "~R$ 629/mês",
     saving: "R$ 5.677",
     period: "8 meses",
-    quote: "Economizamos mais de R$5.000 em 8 meses sem mudar nada na operação.",
-  },
-  {
-    name: "Padaria Sabor & Cia",
-    segment: "Alimentação",
-    location: "Erechim/RS",
-    before: "R$ 2.400",
-    after: "R$ 1.800",
-    saving: "R$ 4.200",
-    period: "7 meses",
-    quote: "Achei que ia ser complicado por ser CNPJ, mas foi tudo digital e rápido.",
-  },
-  {
-    name: "Hotel Thermas",
-    segment: "Hotelaria",
-    location: "Marcelino Ramos/RS",
-    before: "R$ 8.200",
-    after: "R$ 6.150",
-    saving: "R$ 12.300",
-    period: "6 meses",
-    quote: "Com o volume que consumimos, o desconto fez uma diferença enorme no caixa.",
+    quote: "Muito contente com nossa parceria que já conseguimos economizar R$5.677,91 em 8 meses!! Grato pela confiança.",
   },
 ];
 
@@ -107,15 +87,15 @@ const faqItems = [
   },
   {
     question: "Muda algo no meu contrato com a RGE?",
-    answer: "Não. Seu contrato com a distribuidora RGE permanece exatamente o mesmo. A Plus Energy atua como geradora de créditos de energia que são aplicados automaticamente na sua fatura.",
+    answer: "A titularidade da conta passa para a Plus Energy, que é o que libera os créditos da usina. A energia continua vindo pela rede da RGE e, se faltar luz, você segue ligando para a RGE.",
   },
   {
     question: "E se eu mudar de endereço?",
     answer: "Sem problema. Basta nos informar o novo endereço e transferimos os créditos para a nova unidade consumidora, desde que continue na área de cobertura da RGE no RS.",
   },
   {
-    question: "Tem fidelidade ou multa de cancelamento?",
-    answer: "Não. Nosso contrato não tem fidelidade. Você pode cancelar a qualquer momento, sem multa, bastando comunicar com 30 dias de antecedência.",
+    question: "Tem multa de cancelamento?",
+    answer: "Não. O contrato é de 3 meses e renova sozinho. Pode cancelar sem multa, é só avisar com 90 dias de antecedência.",
   },
   {
     question: "Como funciona a cobrança?",
@@ -176,7 +156,7 @@ export function ParaEmpresasClient() {
             transition={{ delay: 0.2 }}
             className="text-white/50 text-lg max-w-xl mx-auto mb-12"
           >
-            Sem instalar nada, sem obra, sem fidelidade. Apenas desconto todo mês na conta CNPJ.
+            Sem instalar nada e sem obra. Desconto todo mês sobre a energia compensada da conta CNPJ.
           </motion.p>
 
           <motion.div
@@ -415,17 +395,17 @@ export function ParaEmpresasClient() {
 
                 <div className="bg-white rounded-xl border border-pe-slate-100 p-4 grid grid-cols-2 gap-3 mt-auto">
                   <div>
-                    <p className="text-[10px] text-pe-slate-400 uppercase tracking-wider">Antes</p>
+                    <p className="text-[10px] text-pe-slate-400 uppercase tracking-wider">Conta média</p>
                     <p className="font-heading font-bold text-pe-slate-600">{c.before}</p>
                   </div>
                   <div>
-                    <p className="text-[10px] text-pe-slate-400 uppercase tracking-wider">Depois</p>
+                    <p className="text-[10px] text-pe-slate-400 uppercase tracking-wider">Desconto estimado</p>
                     <p className="font-heading font-bold text-pe-green-600">{c.after}</p>
                   </div>
                   <div className="col-span-2 pt-2 border-t border-pe-slate-100 flex items-center gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-pe-green-600 shrink-0" />
                     <p className="text-xs text-pe-slate-600">
-                      <strong className="text-pe-green-700">{c.saving}</strong> economizados em {c.period}
+                      <strong className="text-pe-green-700">{c.saving}</strong> economizados em {c.period}, pelo relato dele
                     </p>
                   </div>
                 </div>

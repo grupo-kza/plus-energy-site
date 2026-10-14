@@ -1,16 +1,10 @@
 "use client";
 
-import { MessageCircle, Shield, Star, Zap } from "lucide-react";
+import { MessageCircle, Shield, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import { useWhatsAppLink } from "@/lib/useWhatsAppLink";
 import { trackWhatsAppClick } from "@/lib/gtm";
 
-const AVATARS = [
-  "https://i.pravatar.cc/150?img=12",
-  "https://i.pravatar.cc/150?img=47",
-  "https://i.pravatar.cc/150?img=32",
-  "https://i.pravatar.cc/150?img=68",
-];
 
 // Subtle sparkle positions inside card
 const SPARKLES = [
@@ -116,42 +110,10 @@ export function FinalCta() {
           Sem instalação &bull; Sem burocracia &bull; 100% digital
         </motion.p>
 
-        {/* Social proof */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.25 }}
-          className="relative inline-flex items-center gap-3 mb-8 px-4 py-2.5 rounded-2xl bg-white/5 border border-white/10"
-        >
-          {/* Stacked avatars */}
-          <div className="flex -space-x-2 shrink-0">
-            {AVATARS.map((src, i) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={i}
-                src={src}
-                alt=""
-                width={28}
-                height={28}
-                className="w-7 h-7 rounded-full border-2 object-cover"
-                style={{ borderColor: "#0f2a0f" }}
-              />
-            ))}
-          </div>
-
-          <div className="text-left">
-            {/* Stars */}
-            <div className="flex gap-0.5 mb-0.5">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="w-3 h-3 fill-pe-solar-400 text-pe-solar-400" />
-              ))}
-            </div>
-            <p className="text-white/60 text-xs leading-tight">
-              Junte-se a <strong className="text-white/90">+200 famílias</strong> economizando no RS
-            </p>
-          </div>
-        </motion.div>
+        {/* Prova */}
+        <p className="relative mb-8 text-white/60 text-xs">
+          Regulamentado pela Lei 14.300/2022 (ANEEL) · CNPJ 51.181.561/0001-75
+        </p>
 
         {/* CTA Button */}
         <motion.div
@@ -198,7 +160,7 @@ export function FinalCta() {
           className="relative mt-5 inline-flex items-center gap-2 text-white/35 text-xs"
         >
           <Shield className="w-3.5 h-3.5 text-pe-green-500 shrink-0" />
-          Sem fidelidade &nbsp;·&nbsp; Cancele quando quiser &nbsp;·&nbsp; Sem multa
+          Sem taxa de adesão &nbsp;·&nbsp; Sem multa para sair &nbsp;·&nbsp; Aviso de 90 dias
         </motion.div>
       </motion.div>
     </section>

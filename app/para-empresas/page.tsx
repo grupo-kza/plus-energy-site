@@ -3,13 +3,13 @@ import { ParaEmpresasClient } from "@/app/para-empresas/ParaEmpresasClient";
 import { JsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Para Empresas — Desconto na Conta de Luz CNPJ",
+  title: "Para empresas: desconto na energia da conta CNPJ",
   description:
-    "Energia solar por assinatura para comércios e empresas no RS. Reduza até 25% na conta de luz sem instalação, sem obra e sem fidelidade.",
+    "Energia solar por assinatura para comércios e empresas no RS. 25% de desconto sobre a energia compensada, sem instalação, sem obra e sem multa para sair.",
   openGraph: {
-    title: "Energia Solar para Empresas — Plus Energy",
+    title: "Energia solar para empresas | Plus Energy",
     description:
-      "Até 25% de desconto na conta de luz CNPJ. Sem instalar nada, sem obra, sem fidelidade. 100% digital.",
+      "25% de desconto sobre a energia compensada da conta CNPJ. Sem instalar nada, sem obra e sem multa para sair.",
   },
 };
 

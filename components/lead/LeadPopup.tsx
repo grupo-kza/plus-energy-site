@@ -8,7 +8,7 @@ import { DiscountDisplay } from "./DiscountDisplay";
 import { LeadForm } from "./LeadForm";
 import { SuccessScreen } from "./SuccessScreen";
 import { NotEligibleScreen } from "./NotEligibleScreen";
-import { DEFAULT_BILL, MIN_QUALIFIED_BILL, COMPANY } from "@/lib/constants";
+import { DEFAULT_BILL, MIN_QUALIFIED_BILL, COMPANY, calculateSavings } from "@/lib/constants";
 import { trackPopupOpen, trackPopupClose, trackLeadStep, trackLeadSubmit, trackLeadSuccess } from "@/lib/gtm";
 
 type Step = "slider" | "discount" | "distributor" | "form" | "success" | "not_eligible";
@@ -101,7 +101,7 @@ export function LeadPopup() {
   const handleSubmit = useCallback(
     async (data: { phone: string }) => {
       setIsLoading(true);
-      const estimatedDiscount = billValue * 0.25;
+      const estimatedDiscount = calculateSavings(billValue).monthly;
 
       trackLeadSubmit({ billValue, distributor, estimatedDiscount, phone: data.phone });
 
@@ -119,7 +119,7 @@ export function LeadPopup() {
           }),
         });
       } catch {
-        // Still show success — webhook failure shouldn't block UX
+        // Still show success: webhook failure shouldn't block UX
         console.error("Failed to send lead data to webhook");
       }
 
@@ -316,7 +316,7 @@ export function LeadPopup() {
                     transition={{ duration: 0.2 }}
                   >
                     <p className="text-sm text-pe-slate-600 mb-4">
-                      Só o WhatsApp — o resto a gente combina na conversa:
+                      Só o WhatsApp. O resto a gente combina na conversa:
                     </p>
                     <LeadForm onSubmit={handleSubmit} isLoading={isLoading} />
                   </motion.div>

@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LeadPopup } from "@/components/lead/LeadPopup";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { CookieBanner } from "@/components/ui/CookieBanner";
 import "./globals.css";
 
 const GTM_ID = "GTM-PDW865DV";
@@ -26,11 +27,11 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://plusenergy.net.br"),
   title: {
-    default: "Plus Energy — Energia Solar por Assinatura | Até 25% de Desconto",
+    default: "Plus Energy | Energia Solar por Assinatura no RS",
     template: "%s | Plus Energy",
   },
   description:
-    "Pague até 25% menos na conta de luz sem instalar nada. Energia solar por assinatura para residências e empresas no RS. Sem obra, sem taxa de adesão, sem fidelidade.",
+    "Sem multa para sair e sem obra: 25% de desconto sobre a energia compensada da conta de luz. Energia solar por assinatura no RS.",
   keywords: [
     "energia solar por assinatura",
     "desconto conta de luz",
@@ -46,15 +47,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: "Plus Energy",
-    title: "Plus Energy — Até 25% de Desconto na Conta de Luz",
+    title: "Plus Energy | Energia solar por assinatura no RS",
     description:
-      "Energia solar por assinatura. Sem instalar nada, sem taxa, sem fidelidade. 100% digital.",
+      "Energia solar por assinatura. Sem instalar nada, sem taxa de adesão e sem multa para sair. 100% digital.",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Plus Energy — Energia Solar por Assinatura",
-    description: "Até 25% de desconto na conta de luz sem instalar nada.",
+    title: "Plus Energy | Energia solar por assinatura",
+    description: "25% de desconto sobre a energia compensada, sem instalar nada.",
   },
   alternates: {
     canonical: "./",
@@ -79,6 +80,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={`${sora.variable} ${dmSans.variable}`}>
+      {/* Consent Mode v2: começa negado e só libera quando a pessoa aceita no banner. Roda antes do GTM. */}
+      <Script
+        id="consent-default"
+        strategy="beforeInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+var c='denied';try{c=localStorage.getItem('pe_consent')==='granted'?'granted':'denied';}catch(e){}
+gtag('consent','default',{ad_storage:c,ad_user_data:c,ad_personalization:c,analytics_storage:c,functionality_storage:'granted',security_storage:'granted',wait_for_update:500});`,
+        }}
+      />
       <Script
         id="gtm-script"
         strategy="afterInteractive"
@@ -103,6 +114,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <main className="flex-1">{children}</main>
         <Footer />
         <LeadPopup />
+        <CookieBanner />
         <WhatsAppButton />
       </body>
     </html>

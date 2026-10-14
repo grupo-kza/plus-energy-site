@@ -3,14 +3,13 @@
 import { motion } from "framer-motion";
 import { ShieldCheck, ArrowRight, ChevronDown, Wrench, Ban, Unlock, Smartphone, BadgePercent, Zap } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Counter } from "@/components/ui/Counter";
 
 const tickerItems = [
   { icon: Wrench, text: "Sem instalação" },
   { icon: Ban, text: "Sem taxa de adesão" },
-  { icon: Unlock, text: "Sem fidelidade" },
+  { icon: Unlock, text: "Sem multa para sair" },
   { icon: Smartphone, text: "100% Digital" },
-  { icon: BadgePercent, text: "Até 25% de desconto" },
+  { icon: BadgePercent, text: "25% sobre a energia compensada" },
   { icon: Zap, text: "Ativação em 30-60 dias" },
   { icon: ShieldCheck, text: "Regulamentado ANEEL" },
 ];
@@ -46,7 +45,7 @@ export function Hero() {
         className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
       />
 
-      {/* Dark overlay — gradient from left (darker) to right (lighter) */}
+      {/* Dark overlay: gradient from left (darker) to right (lighter) */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -56,7 +55,7 @@ export function Hero() {
         }}
       />
 
-      {/* Gold atmospheric glow — bottom center */}
+      {/* Gold atmospheric glow: bottom center */}
       <div
         aria-hidden="true"
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[300px] pointer-events-none"
@@ -87,7 +86,7 @@ export function Hero() {
             <motion.div custom={0} variants={fadeInUp} className="mb-6">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/50 border border-pe-solar-500/30 text-xs font-semibold text-pe-solar-400 uppercase tracking-widest backdrop-blur-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-pe-solar-400 animate-pulse" />
-                Energia Solar por Assinatura — RS
+                Energia Solar por Assinatura no RS
               </span>
             </motion.div>
 
@@ -96,9 +95,8 @@ export function Hero() {
               variants={fadeInUp}
               className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl font-extrabold leading-[1.1] text-white"
             >
-              Pague até{" "}
               <span className="animate-shimmer">25%</span>{" "}
-              menos na conta de luz{" "}
+              de desconto sobre a energia compensada da sua conta de luz,{" "}
               <span className="text-pe-solar-400">sem instalar nada</span>
             </motion.h1>
 
@@ -107,8 +105,9 @@ export function Hero() {
               variants={fadeInUp}
               className="mt-6 text-lg md:text-xl text-white/70 max-w-xl leading-relaxed"
             >
-              Energia solar por assinatura. Sem obra, sem taxa de adesão,
-              sem fidelidade. 100% digital.
+              Energia solar por assinatura no RS, para conta RGE ou CPFL. O desconto
+              vale sobre a energia compensada, a parte da conta que a usina da Plus
+              abate. Sem obra, sem taxa de adesão e sem multa para sair.
             </motion.p>
 
             {/* CTAs */}
@@ -129,34 +128,30 @@ export function Hero() {
             <motion.div custom={4} variants={fadeInUp} className="mt-8">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-white/15 text-sm text-white/70 backdrop-blur-sm">
                 <ShieldCheck className="w-4 h-4 text-pe-solar-400 shrink-0" />
-                Regulamentado pela Lei 14.300/2022 &mdash; ANEEL
+                Regulamentado pela Lei 14.300/2022 (ANEEL)
               </span>
             </motion.div>
 
-            {/* Stats strip — count-up animado */}
+            {/* Stats strip: count-up animado */}
             <motion.div custom={5} variants={fadeInUp} className="mt-10 flex items-center gap-8">
               <div className="text-center">
-                <p className="font-heading text-2xl font-extrabold text-pe-solar-400">
-                  <Counter end={25} suffix="%" duration={1800} className="font-heading text-2xl font-extrabold text-pe-solar-400" />
-                </p>
-                <p className="text-xs text-white/50 uppercase tracking-wide mt-0.5">de desconto</p>
+                <p className="font-heading text-2xl font-extrabold text-pe-solar-400">25%</p>
+                <p className="text-xs text-white/50 uppercase tracking-wide mt-0.5">sobre a energia compensada</p>
               </div>
               <div className="w-px h-8 bg-white/15" />
               <div className="text-center">
                 <p className="font-heading text-2xl font-extrabold text-pe-solar-400">R$ 0</p>
-                <p className="text-xs text-white/50 uppercase tracking-wide mt-0.5">de investimento</p>
+                <p className="text-xs text-white/50 uppercase tracking-wide mt-0.5">de adesão</p>
               </div>
               <div className="w-px h-8 bg-white/15" />
               <div className="text-center">
-                <p className="font-heading text-2xl font-extrabold text-pe-solar-400">
-                  <Counter end={100} suffix="%" duration={1600} className="font-heading text-2xl font-extrabold text-pe-solar-400" />
-                </p>
+                <p className="font-heading text-2xl font-extrabold text-pe-solar-400">100%</p>
                 <p className="text-xs text-white/50 uppercase tracking-wide mt-0.5">digital</p>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Right side — Symbol showcase + decorative rings */}
+          {/* Right side: Symbol showcase + decorative rings */}
           <motion.div
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -183,7 +178,7 @@ export function Hero() {
                 }}
               />
 
-              {/* Symbol — center */}
+              {/* Symbol: center */}
               <div className="relative z-10 animate-float">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -212,7 +207,7 @@ export function Hero() {
         }}
       />
 
-      {/* Ticker strip — glassmorphism sobre a foto */}
+      {/* Ticker strip: glassmorphism sobre a foto */}
       <div className="absolute bottom-0 left-0 right-0 z-20 overflow-hidden">
         {/* Gold top line */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-pe-solar-400/50 to-transparent" />

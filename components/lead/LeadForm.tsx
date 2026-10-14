@@ -43,7 +43,7 @@ export function LeadForm({ onSubmit, isLoading }: LeadFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Phone / WhatsApp — único dado pedido: o resto (nome, contexto) rola na conversa */}
+      {/* Phone / WhatsApp: único dado pedido: o resto (nome, contexto) rola na conversa */}
       <div>
         <label htmlFor="lead-phone" className="block text-sm font-medium text-pe-slate-700 mb-1">
           Seu WhatsApp

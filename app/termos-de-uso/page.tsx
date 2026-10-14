@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Termos de Uso — Plus Energy",
+  title: "Termos de Uso | Plus Energy",
   description: "Termos e condições de uso dos serviços da Plus Energy.",
 };
 
@@ -21,10 +21,10 @@ export default function TermosUsoPage() {
         <p>Podem contratar o serviço pessoas físicas (CPF) ou jurídicas (CNPJ) que sejam titulares de conta de energia elétrica ativa junto à RGE, com consumo mínimo de R$ 150,00 mensais.</p>
 
         <h2>3. Desconto e cobrança</h2>
-        <p>O desconto de até 25% é aplicado sobre o valor da tarifa de energia (TUSD + TE), conforme previsto em contrato. A cobrança é realizada mensalmente via Conta Única digital, enviada por WhatsApp e e-mail. A conta da distribuidora RGE é paga automaticamente pela Plus Energy.</p>
+        <p>O desconto de 25% é aplicado sobre a energia compensada, pela tarifa de energia (TUSD + TE), conforme previsto em contrato. Imposto, iluminação pública e taxas não têm desconto. A cobrança é realizada mensalmente via Conta Única digital, enviada por WhatsApp e e-mail. A conta da distribuidora RGE é paga automaticamente pela Plus Energy.</p>
 
         <h2>4. Cancelamento</h2>
-        <p>O contrato não possui fidelidade. O cliente pode cancelar a qualquer momento, sem multa, bastando comunicar com 30 dias de antecedência. Eventuais saldos pendentes deverão ser quitados.</p>
+        <p>O contrato tem prazo de 3 meses, com renovação automática por períodos iguais. Para encerrar, basta comunicar com 90 dias de antecedência. Quem encerrar antes do prazo mínimo paga apenas o saldo de créditos que constar na fatura da distribuidora, sem multa adicional. Eventuais valores pendentes deverão ser quitados.</p>
 
         <h2>5. Responsabilidades</h2>
         <p>A Plus Energy não é responsável por falhas na distribuição de energia elétrica, que são de responsabilidade da distribuidora RGE. O serviço não altera a qualidade ou continuidade do fornecimento de energia.</p>

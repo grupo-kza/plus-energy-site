@@ -54,7 +54,7 @@ export function EnvironmentalImpact() {
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-          {/* ── Left — text ── */}
+          {/* ── Left: text ── */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -72,7 +72,7 @@ export function EnvironmentalImpact() {
             </h2>
 
             <p className="text-pe-slate-500 text-lg leading-relaxed mb-10">
-              Com a Plus Energy, você tem tudo em uma única conta de luz — e o melhor:{" "}
+              Com a Plus Energy, você tem tudo em uma única conta de luz. E o melhor:{" "}
               <strong className="text-black font-semibold">economia todo mês!</strong> Você passa a receber
               a sua Conta Única digital, por WhatsApp e e-mail, mostrando em detalhes quanto você está
               economizando. Sua antiga conta da RGE é paga automaticamente. Sem burocracia, sem obra.
@@ -112,7 +112,7 @@ export function EnvironmentalImpact() {
             </motion.button>
           </motion.div>
 
-          {/* ── Right — mockup + effects ── */}
+          {/* ── Right: mockup + effects ── */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -162,8 +162,8 @@ export function EnvironmentalImpact() {
                   <CheckCircle2 className="w-4 h-4 text-pe-green-600" />
                 </div>
                 <div>
-                  <p className="text-[10px] text-pe-slate-400 leading-none">Economia</p>
-                  <p className="text-xs font-bold text-pe-green-600 leading-tight">25% off</p>
+                  <p className="text-[10px] text-pe-slate-400 leading-none">Desconto</p>
+                  <p className="text-xs font-bold text-pe-green-600 leading-tight">25% sobre a energia compensada</p>
                 </div>
               </motion.div>
 

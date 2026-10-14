@@ -119,7 +119,7 @@ export function Footer() {
                 {COMPANY.tagline}
               </p>
               <p className="text-sm leading-relaxed text-pe-slate-400">
-                Economize até 25% na sua conta de luz sem instalar nada.
+                25% de desconto sobre a energia compensada da sua conta de luz, sem instalar nada.
                 Energia limpa direto da usina solar para o seu medidor,
                 regulamentado pela ANEEL.
               </p>
@@ -224,8 +224,8 @@ export function Footer() {
         <div className="border-t border-pe-green-800/50">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
             <div className="flex flex-col items-center gap-3 text-xs text-pe-slate-500 sm:flex-row sm:justify-between">
-              <p>&copy; 2025 {COMPANY.name} &mdash; Marcelino Ramos, RS</p>
-              <p className="text-center">Regulamentado pela Lei 14.300/2022 &mdash; ANEEL</p>
+              <p>&copy; 2025 {COMPANY.name}, Marcelino Ramos, RS</p>
+              <p className="text-center">Regulamentado pela Lei 14.300/2022 (ANEEL)</p>
               <p>CNPJ: {COMPANY.cnpj}</p>
             </div>
           </div>

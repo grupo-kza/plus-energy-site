@@ -1,5 +1,5 @@
 // ========================================
-// Plus Energy — Constants & Data
+// Plus Energy: Constants & Data
 // ========================================
 
 export const COMPANY = {
@@ -7,8 +7,8 @@ export const COMPANY = {
   tagline: "Energia solar por assinatura",
   cnpj: "51.181.561/0001-75",
   responsible: "Daiana Costenaro Stolarski da Rosa",
-  legalForum: "Marcelino Ramos — RS",
-  coverage: "Rio Grande do Sul — rede distribuidora RGE (CPFL)",
+  legalForum: "Marcelino Ramos, RS",
+  coverage: "Rio Grande do Sul, rede distribuidora RGE (CPFL)",
   regulation: "Lei 14.300 de 2022 (ANEEL)",
   whatsapp: "5554997150494",
   whatsappMessage: "Olá! Vi o site da Plus Energy e quero saber mais sobre o desconto na conta de luz.",
@@ -16,38 +16,57 @@ export const COMPANY = {
   webhookUrl: "https://hook.siteup.com.br/webhook/1b025975-7069-402a-adb9-341e9de3e7d5",
 } as const;
 
-export const DISCOUNT_RATE = 0.25; // 25%
-export const MIN_BILL = 350;
+// Régua da Plus (voz travada com o Lucas em 19/08/2026, skill plus-energy-voz):
+// o desconto vale só sobre a energia compensada, nunca sobre a fatura inteira.
+// 25% fixo sobre a energia compensada, igual ao contrato, a partir de R$ 300 (decisão 2e27525e-4c9,
+// 14/10/2026; antes era 20% de R$ 300 a 400). Abaixo de R$ 300 a Plus não atende.
+// Nunca escrever "25% na conta" nem "25% de desconto" solto: sempre "sobre a energia compensada".
+export const MIN_BILL = 300;
 export const MAX_BILL = 5000;
 export const DEFAULT_BILL = 500;
-// Mesmo corte do formulário nativo do Meta ("Até R$400" é a faixa que não segue).
-// Abaixo disso o funil do site não chega ao WhatsApp — decisão de 2026-08-08.
-export const MIN_QUALIFIED_BILL = 400;
+// Abaixo disso o funil do site não chega ao WhatsApp. Era R$ 400 (08/08/2026);
+// o Lucas abriu para R$ 300 em 14/10/2026 (decisão 2efe03a5-424), igual à régua.
+export const MIN_QUALIFIED_BILL = MIN_BILL;
 
-// CO2 per kWh in Brazil (average)
-export const CO2_PER_KWH = 0.075; // kg
-export const TREES_PER_TON_CO2 = 6.3;
-export const AVG_PRICE_PER_KWH = 0.85; // R$ approximate
+export const DISCOUNT_RATE = 0.25;
+
+// Quanto da conta vira energia compensada. O resto segue com a RGE: mínimo da ligação,
+// iluminação pública e encargos. Estimativa feita com a memória de cálculo do gerador de
+// proposta (tarifas RGE, Resolução ANEEL 3.473/2025): cerca de 54% em contas até R$ 800,
+// subindo até 68% em R$ 5.000. A simulação exata sai da conta real do cliente.
+const COMPENSATED_SHARE: ReadonlyArray<readonly [number, number]> = [
+  [300, 0.54],
+  [800, 0.55],
+  [1500, 0.6],
+  [2600, 0.65],
+  [5000, 0.68],
+];
+
+export function compensatedShare(billValue: number) {
+  const pts = COMPENSATED_SHARE;
+  if (billValue <= pts[0][0]) return pts[0][1];
+  for (let i = 1; i < pts.length; i++) {
+    const [x1, y1] = pts[i];
+    const [x0, y0] = pts[i - 1];
+    if (billValue <= x1) return y0 + ((billValue - x0) / (x1 - x0)) * (y1 - y0);
+  }
+  return pts[pts.length - 1][1];
+}
 
 export function calculateSavings(billValue: number) {
-  const discount = billValue * DISCOUNT_RATE;
-  const monthly = discount;
-  const yearly = monthly * 12;
-  const twoYears = monthly * 24;
-
-  // Approximate kWh from bill value
-  const kwhMonthly = billValue / AVG_PRICE_PER_KWH;
-  const co2MonthlyKg = kwhMonthly * CO2_PER_KWH;
-  const co2YearlyTons = (co2MonthlyKg * 12) / 1000;
-  const treesEquiv = Math.round(co2YearlyTons * TREES_PER_TON_CO2);
+  const rate = DISCOUNT_RATE;
+  const compensated = billValue * compensatedShare(billValue);
+  // Valor redondo: é estimativa, a conta real decide.
+  const monthly = Math.round(compensated * rate);
 
   return {
-    monthly: Math.round(monthly * 100) / 100,
-    yearly: Math.round(yearly * 100) / 100,
-    twoYears: Math.round(twoYears * 100) / 100,
-    co2YearlyTons: Math.round(co2YearlyTons * 100) / 100,
-    treesEquiv,
-    kwhMonthly: Math.round(kwhMonthly),
+    rate,
+    ratePercent: Math.round(rate * 100),
+    compensated: Math.round(compensated),
+    stayWithRge: Math.round(billValue - compensated),
+    monthly,
+    yearly: monthly * 12,
+    twoYears: monthly * 24,
   };
 }
 
@@ -88,7 +107,7 @@ export const HOW_IT_WORKS_STEPS = [
   {
     step: 5,
     title: "Pagamento simplificado",
-    description: "Você paga um único boleto da Plus Energy, já com o desconto aplicado.",
+    description: "Você paga um único boleto da Plus Energy. Quando o desconto começa, ele já vem aplicado nesse boleto.",
     icon: "Receipt",
   },
 ] as const;
@@ -96,114 +115,32 @@ export const HOW_IT_WORKS_STEPS = [
 export const CASE_MAICON = {
   name: "Maicon",
   company: "Mercado e Açougue RK LTDA",
-  location: "Marcelino Ramos — RS",
-  previousBill: 3785.54,
-  currentBill: 2998.90,
-  monthlySavings: 786.64,
+  location: "Marcelino Ramos, RS",
+  bill: 3785.54,
   totalSavings: 5677.91,
   months: 8,
-  discountRate: 25,
   testimonial:
     "Muito contente com nossa parceria que já conseguimos economizar R$5.677,91 em 8 meses!! Grato pela confiança",
-  type: "CNPJ — Trifásico",
+  type: "CNPJ, trifásico",
 } as const;
 
+// Só caso com fonte. Os outros cinco depoimentos que estavam aqui não tinham cliente,
+// conta nem autorização registrados: saíram em 14/10/2026 (sprint Plus, F4).
+// Maicon: números da conta dele e frase dele; manter só com OK dele (pendente).
 export const CASES = [
   {
     name: "Maicon R.",
     company: "Mercado e Açougue RK LTDA",
-    location: "Marcelino Ramos — RS",
-    previousBill: 3785.54,
-    currentBill: 2998.90,
-    monthlySavings: 786.64,
+    location: "Marcelino Ramos, RS",
+    // Conta média informada no site original (sem a fatura anexada). O desconto mostrado sai da régua.
+    bill: 3785.54,
     totalSavings: 5677.91,
     months: 8,
-    discountRate: 25,
     testimonial: "Muito contente com nossa parceria que já conseguimos economizar R$5.677,91 em 8 meses!! Grato pela confiança.",
-    type: "Comércio — CNPJ",
+    type: "Comércio, CNPJ",
     initials: "MR",
     image: "/images/cases/maicon.png",
     reviewDate: "2025-06-15",
-  },
-  {
-    name: "Ana Cláudia S.",
-    company: "Residência",
-    location: "Passo Fundo — RS",
-    previousBill: 487.00,
-    currentBill: 365.25,
-    monthlySavings: 121.75,
-    totalSavings: 730.50,
-    months: 6,
-    discountRate: 25,
-    testimonial: "Simples, rápido e sem dor de cabeça. Assinei pelo celular e já no segundo mês o desconto apareceu na conta. Recomendo pra todo mundo!",
-    type: "Residencial — CPF",
-    initials: "AS",
-    image: "/images/cases/ana-claudia.png",
-    reviewDate: "2025-09-20",
-  },
-  {
-    name: "Pedro H. L.",
-    company: "Farmácia Popular",
-    location: "Erechim — RS",
-    previousBill: 1240.00,
-    currentBill: 930.00,
-    monthlySavings: 310.00,
-    totalSavings: 2790.00,
-    months: 9,
-    discountRate: 25,
-    testimonial: "A gente sempre desconfiava dessas ofertas, mas é tudo regulamentado pela ANEEL. Já economizamos quase R$3 mil desde que entramos!",
-    type: "Comércio — CNPJ",
-    initials: "PL",
-    image: "/images/cases/pedro.png",
-    reviewDate: "2025-10-05",
-  },
-  {
-    name: "Família Oliveira",
-    company: "Residência",
-    location: "Ijuí — RS",
-    previousBill: 392.00,
-    currentBill: 294.00,
-    monthlySavings: 98.00,
-    totalSavings: 588.00,
-    months: 6,
-    discountRate: 25,
-    testimonial: "Nem acreditei quando vi o boleto mais barato! Sem instalar nada, sem nenhum custo. Pena que não conheci antes.",
-    type: "Residencial — CPF",
-    initials: "FO",
-    image: "/images/cases/familia-oliveira.png",
-    reviewDate: "2025-11-10",
-  },
-  {
-    name: "Rodrigo M.",
-    company: "Posto de Combustível",
-    location: "Santo Ângelo — RS",
-    previousBill: 2180.00,
-    currentBill: 1635.00,
-    monthlySavings: 545.00,
-    totalSavings: 3270.00,
-    months: 6,
-    discountRate: 25,
-    testimonial: "Conta alta todo mês virou rotina no posto. Com a Plus Energy cortamos quase R$550 por mês sem mudar absolutamente nada.",
-    type: "Comércio — CNPJ",
-    initials: "RM",
-    image: "/images/cases/rodrigo.png",
-    reviewDate: "2025-12-01",
-  },
-  {
-    name: "Carlos B.",
-    company: "Barbearia",
-    location: "Cruz Alta — RS",
-    previousBill: 620.00,
-    currentBill: 465.00,
-    monthlySavings: 155.00,
-    totalSavings: 930.00,
-    months: 6,
-    discountRate: 25,
-    testimonial: "Achei que ia ter complicação mas foi tudo pelo celular. Em dois meses já apareceu o desconto. Super indico!",
-    type: "Comércio — CNPJ",
-    initials: "CB",
-    image: "/images/cases/carlos.png",
-    reviewDate: "2026-01-15",
   },
 ] as const;
 
@@ -216,22 +153,22 @@ export const FAQ_DATA = [
   {
     question: "A conta de luz vai para o nome de vocês?",
     answer:
-      "Sim, a titularidade é transferida para a Plus Energy ou cooperativa parceira. Isso é necessário para a RGE liberar os créditos. Mas você continua ligando para a RGE se faltar luz. Na prática, nada muda no seu dia a dia.",
+      "Sim. A titularidade da conta passa para a Plus Energy, e é isso que libera os créditos da usina na sua conta. A energia continua vindo pela rede da RGE e, se faltar luz, você segue ligando para a RGE.",
   },
   {
-    question: "Tem fidelidade ou multa?",
+    question: "Tem multa para cancelar?",
     answer:
-      "Não tem fidelidade. O contrato tem prazo de 3 meses com renovação automática. Para cancelar, você paga apenas o saldo de créditos de energia que ainda restam na conta — sem multa.",
+      "Não tem multa para sair. O contrato é de 3 meses e renova sozinho; para cancelar, é só avisar com 90 dias de antecedência.",
   },
   {
     question: "Em quanto tempo o desconto aparece?",
     answer:
-      "Em torno de 30 a 60 dias após a assinatura. A partir daí já vem descontado automaticamente todo mês.",
+      "Em torno de 30 a 60 dias depois que a Plus Energy assume a titularidade da conta. Os primeiros boletos podem vir cheios: o desconto não começa no dia da assinatura. Depois disso, vem todo mês.",
   },
   {
     question: "Posso fazer para mais de uma conta?",
     answer:
-      "Sim! É feito um contrato para cada unidade consumidora.",
+      "Sim. É feito um contrato para cada unidade consumidora.",
   },
   {
     question: "Funciona para empresa (CNPJ)?",
@@ -241,17 +178,17 @@ export const FAQ_DATA = [
   {
     question: "O que é energia solar por assinatura?",
     answer:
-      "É um modelo regulamentado pela Lei 14.300/2022 que permite consumidores utilizarem energia gerada por usinas remotas sem precisar instalar nada. O desconto aparece diretamente na conta de luz.",
+      "É um modelo regulamentado pela Lei 14.300/2022 que permite usar a energia gerada por usinas remotas sem instalar nada. A energia da usina vira crédito na sua conta e você paga esse crédito com desconto.",
   },
   {
     question: "Como faço para assinar?",
     answer:
-      "Preencha o formulário no site com os dados da sua conta de luz, receba a simulação e, se quiser, assine o contrato digitalmente.",
+      "Manda a sua conta de luz pelo WhatsApp, recebe a simulação com o valor real e, se fizer sentido, assina o contrato digital.",
   },
   {
     question: "Qual o desconto exato?",
     answer:
-      "O desconto é de 25% para contas acima de R$500/mês. Para contas entre R$350 e R$500 o desconto é ajustado proporcionalmente.",
+      "É 25% sobre a energia compensada (a parte da conta que a usina da Plus Energy abate), para qualquer conta a partir de R$ 300. Imposto, iluminação pública e taxas não têm desconto e seguem com a RGE, por isso a economia na fatura inteira fica menor que 25%. O valor exato sai da simulação com a sua conta.",
   },
 ] as const;
 
@@ -264,17 +201,17 @@ export const ENVIRONMENTAL_STATS = {
 export const OBJECTIONS = [
   {
     objection: "Parece bom demais para ser verdade",
-    answer: "Regulamentado pela ANEEL (Lei 14.300/2022). Contrato transparente. Centenas de clientes no RS já economizando.",
+    answer: "Regulamentado pela ANEEL (Lei 14.300/2022). Empresa com CNPJ ativo e contrato digital que você lê antes de assinar.",
     icon: "ShieldCheck",
   },
   {
     objection: "E se eu quiser cancelar?",
-    answer: "Sem multa. Paga apenas o saldo de créditos em aberto. Contrato renovável a cada 3 meses.",
+    answer: "Pode cancelar, sem multa. É só avisar com 90 dias de antecedência.",
     icon: "DoorOpen",
   },
   {
     objection: "Vai mudar algo no meu dia a dia?",
-    answer: "Nada muda. Mesma energia, mesmo fornecimento, mesmos fios. Você só paga menos.",
+    answer: "Mesma energia, mesmo fornecimento, mesmos fios. A diferença é a titularidade da conta, que passa para a Plus Energy, e o boleto único.",
     icon: "RefreshCw",
   },
   {

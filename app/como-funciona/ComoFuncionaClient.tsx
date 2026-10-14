@@ -38,7 +38,7 @@ export function ComoFuncionaClient() {
           <span className="gold-gradient-text">por assinatura</span>
         </h1>
         <p className="text-white/50 text-lg max-w-2xl mx-auto">
-          Em 5 passos simples você começa a economizar até 25% na conta de luz
+          Em 5 passos você passa a ter 25% de desconto sobre a energia compensada da conta de luz
           sem instalar nada no seu imóvel.
         </p>
       </section>
@@ -122,7 +122,7 @@ export function ComoFuncionaClient() {
               {
                 icon: Home,
                 title: "Mesmos fios",
-                desc: "A energia chega pelos mesmos fios de sempre — sem instalar nada",
+                desc: "A energia chega pelos mesmos fios de sempre, sem instalar nada",
               },
             ].map((item, i) => (
               <motion.div
@@ -158,7 +158,7 @@ export function ComoFuncionaClient() {
                 </h3>
                 <p className="text-pe-slate-600 leading-relaxed">
                   A energia solar por assinatura é regulamentada pela{" "}
-                  <strong>Lei 14.300 de 2022</strong> (Marco Legal da Geração Distribuída — ANEEL).
+                  <strong>Lei 14.300 de 2022</strong> (Marco Legal da Geração Distribuída, ANEEL).
                   A modalidade é chamada de GD Remota / Autoconsumo Remoto, operada através da
                   distribuidora <strong>RGE (Grupo CPFL)</strong> no Rio Grande do Sul.
                 </p>

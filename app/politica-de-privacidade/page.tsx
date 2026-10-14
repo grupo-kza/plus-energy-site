@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Política de Privacidade — Plus Energy",
+  title: "Política de Privacidade | Plus Energy",
   description: "Política de privacidade e tratamento de dados da Plus Energy.",
 };
 
@@ -24,7 +24,7 @@ export default function PoliticaPrivacidadePage() {
         <p>A Plus Energy não vende, aluga ou compartilha seus dados pessoais com terceiros para fins comerciais. Dados poderão ser compartilhados com parceiros operacionais (distribuidoras de energia, processadores de pagamento) estritamente para execução do serviço.</p>
 
         <h2>4. Armazenamento e segurança</h2>
-        <p>Seus dados são armazenados em servidores seguros e tratados em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei 13.709/2018).</p>
+        <p>Seus dados são armazenados em servidores seguros e tratados em conformidade com a Lei Geral de Proteção de Dados (LGPD, Lei 13.709/2018).</p>
 
         <h2>5. Seus direitos</h2>
         <p>Você tem o direito de solicitar acesso, correção, portabilidade ou exclusão dos seus dados a qualquer momento. Para exercer esses direitos, entre em contato pelo e-mail <a href="mailto:contato@plusenergy.com.br">contato@plusenergy.com.br</a>.</p>

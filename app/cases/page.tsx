@@ -3,11 +3,11 @@ import Image from "next/image";
 import { CheckCircle2, Star } from "lucide-react";
 import { LeadCta } from "@/components/ui/LeadCta";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { CASES } from "@/lib/constants";
+import { CASES, calculateSavings } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Cases — Clientes que Economizam com a Plus Energy",
-  description: "Veja depoimentos e cases reais de clientes que estão economizando até 25% na conta de luz com a Plus Energy no RS.",
+  title: "Cases: quem economiza com a Plus Energy",
+  description: "O caso do Mercado e Açougue RK, em Marcelino Ramos, cliente da Plus Energy no RS.",
 };
 
 export default function CasesPage() {
@@ -43,17 +43,17 @@ export default function CasesPage() {
               </blockquote>
               <div className="bg-white rounded-xl border border-pe-slate-100 p-4 grid grid-cols-2 gap-3 mt-auto">
                 <div>
-                  <p className="text-[10px] text-pe-slate-400 uppercase tracking-wider">Antes</p>
-                  <p className="font-heading font-bold text-pe-slate-600">R$ {c.previousBill.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</p>
+                  <p className="text-[10px] text-pe-slate-400 uppercase tracking-wider">Conta média</p>
+                  <p className="font-heading font-bold text-pe-slate-600">R$ {c.bill.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] text-pe-slate-400 uppercase tracking-wider">Depois</p>
-                  <p className="font-heading font-bold text-pe-green-600">R$ {c.currentBill.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</p>
+                  <p className="text-[10px] text-pe-slate-400 uppercase tracking-wider">Desconto estimado</p>
+                  <p className="font-heading font-bold text-pe-green-600">~R$ {calculateSavings(c.bill).monthly.toLocaleString("pt-BR")}/mês</p>
                 </div>
                 <div className="col-span-2 pt-2 border-t border-pe-slate-100 flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-pe-green-600 shrink-0" />
                   <p className="text-xs text-pe-slate-600">
-                    <strong className="text-pe-green-700">R$ {c.totalSavings.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</strong> economizados em {c.months} meses
+                    <strong className="text-pe-green-700">R$ {c.totalSavings.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</strong> economizados em {c.months} meses, pelo relato dele
                   </p>
                 </div>
               </div>

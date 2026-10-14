@@ -5,7 +5,7 @@ import { ContactForm } from "@/app/contato/ContactForm";
 import { JsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Contato — Plus Energy",
+  title: "Contato | Plus Energy",
   description: "Entre em contato com a Plus Energy. Atendemos por WhatsApp, e-mail ou formulário. Estamos em Marcelino Ramos/RS.",
 };
 
