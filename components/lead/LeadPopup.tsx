@@ -8,7 +8,7 @@ import { DiscountDisplay } from "./DiscountDisplay";
 import { LeadForm } from "./LeadForm";
 import { SuccessScreen } from "./SuccessScreen";
 import { NotEligibleScreen } from "./NotEligibleScreen";
-import { DEFAULT_BILL, MIN_QUALIFIED_BILL, COMPANY } from "@/lib/constants";
+import { DEFAULT_BILL, MIN_QUALIFIED_BILL, COMPANY, calculateSavings } from "@/lib/constants";
 import { trackPopupOpen, trackPopupClose, trackLeadStep, trackLeadSubmit, trackLeadSuccess } from "@/lib/gtm";
 
 type Step = "slider" | "discount" | "distributor" | "form" | "success" | "not_eligible";
@@ -101,7 +101,7 @@ export function LeadPopup() {
   const handleSubmit = useCallback(
     async (data: { phone: string }) => {
       setIsLoading(true);
-      const estimatedDiscount = billValue * 0.25;
+      const estimatedDiscount = calculateSavings(billValue).monthly;
 
       trackLeadSubmit({ billValue, distributor, estimatedDiscount, phone: data.phone });
 
