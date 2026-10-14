@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { MapPin, Zap, Building2, ShieldCheck } from "lucide-react";
 import { COMPANY } from "@/lib/constants";
 
-/* Real RS boundary — derived from IBGE/GeoJSON data, viewBox 0 0 280 260 */
+/* Real RS boundary: derived from IBGE/GeoJSON data, viewBox 0 0 280 260 */
 const RS_PATH =
   "M 197.2,175.1 L 190.7,182.5 L 195.8,192.9 L 178.3,231.7 L 148.1,258.1 L 147.5,251.3 L 151.1,234.7 L 159.5,223.0 L 173.4,223.4 L 176.6,197.7 L 172.5,200.2 L 172.5,207.7 L 155.3,216.3 L 144.9,210.7 L 138.0,198.5 L 133.5,192.1 L 124.9,189.0 L 109.5,172.3 L 96.7,167.6 L 90.9,165.4 L 83.4,159.4 L 77.7,152.5 L 70.0,147.5 L 65.0,153.4 L 57.5,150.1 L 53.7,142.5 L 48.0,135.2 L 42.1,130.1 L 35.7,123.6 L 28.5,117.4 L 18.9,118.7 L 12.0,124.3 L 0.5,121.1 L 14.1,105.6 L 29.4,93.1 L 43.3,77.6 L 53.8,62.3 L 64.8,50.1 L 71.0,42.0 L 80.0,36.1 L 88.8,30.1 L 96.5,25.1 L 104.6,16.5 L 112.0,13.4 L 120.8,11.6 L 129.8,4.0 L 144.2,3.7 L 160.8,0.9 L 174.3,7.9 L 188.9,8.4 L 203.0,17.1 L 217.2,19.9 L 233.2,34.1 L 245.9,48.3 L 263.2,54.0 L 273.9,54.2 L 277.7,60.1 L 271.4,65.4 L 271.2,74.9 L 268.2,81.4 L 263.9,84.2 L 270.2,82.8 L 276.8,91.2 L 255.0,137.1 L 205.1,188.3 L 195.3,185.3 L 215.6,176.3 L 228.3,163.7 L 237.5,148.8 L 246.4,128.9 L 249.9,126.7 L 242.0,125.3 L 232.4,128.3 L 226.9,122.0 L 223.4,115.4 L 224.5,125.8 L 224.7,132.2 L 217.7,155.7 L 206.1,163.4 L 198.2,173.2 Z";
 
@@ -51,7 +51,7 @@ export function CoverageMap() {
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-          {/* ── Left — text ── */}
+          {/* ── Left: text ── */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -112,7 +112,7 @@ export function CoverageMap() {
             </motion.button>
           </motion.div>
 
-          {/* ── Right — RS Map ── */}
+          {/* ── Right: RS Map ── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.88 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -193,7 +193,7 @@ export function CoverageMap() {
                   ))
                 )}
 
-                {/* ── Marcelino Ramos pin — upper right, coords 27.4°S 51.9°W → (202, 13) ── */}
+                {/* ── Marcelino Ramos pin: upper right, coords 27.4°S 51.9°W → (202, 13) ── */}
                 <g transform="translate(202, 13)">
                   {/* Pulse rings */}
                   <motion.circle
@@ -236,7 +236,7 @@ export function CoverageMap() {
 
               </svg>
 
-              {/* Floating badge — "Somente RS" */}
+              {/* Floating badge: "Somente RS" */}
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}

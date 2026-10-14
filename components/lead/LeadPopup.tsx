@@ -119,7 +119,7 @@ export function LeadPopup() {
           }),
         });
       } catch {
-        // Still show success — webhook failure shouldn't block UX
+        // Still show success: webhook failure shouldn't block UX
         console.error("Failed to send lead data to webhook");
       }
 

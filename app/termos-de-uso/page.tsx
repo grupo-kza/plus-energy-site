@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Termos de Uso — Plus Energy",
+  title: "Termos de Uso | Plus Energy",
   description: "Termos e condições de uso dos serviços da Plus Energy.",
 };
 

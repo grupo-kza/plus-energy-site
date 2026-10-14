@@ -45,7 +45,7 @@ export function Hero() {
         className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
       />
 
-      {/* Dark overlay — gradient from left (darker) to right (lighter) */}
+      {/* Dark overlay: gradient from left (darker) to right (lighter) */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -55,7 +55,7 @@ export function Hero() {
         }}
       />
 
-      {/* Gold atmospheric glow — bottom center */}
+      {/* Gold atmospheric glow: bottom center */}
       <div
         aria-hidden="true"
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[300px] pointer-events-none"
@@ -133,7 +133,7 @@ export function Hero() {
               </span>
             </motion.div>
 
-            {/* Stats strip — count-up animado */}
+            {/* Stats strip: count-up animado */}
             <motion.div custom={5} variants={fadeInUp} className="mt-10 flex items-center gap-8">
               <div className="text-center">
                 <p className="font-heading text-2xl font-extrabold text-pe-solar-400">até 25%</p>
@@ -152,7 +152,7 @@ export function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Right side — Symbol showcase + decorative rings */}
+          {/* Right side: Symbol showcase + decorative rings */}
           <motion.div
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -179,7 +179,7 @@ export function Hero() {
                 }}
               />
 
-              {/* Symbol — center */}
+              {/* Symbol: center */}
               <div className="relative z-10 animate-float">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -208,7 +208,7 @@ export function Hero() {
         }}
       />
 
-      {/* Ticker strip — glassmorphism sobre a foto */}
+      {/* Ticker strip: glassmorphism sobre a foto */}
       <div className="absolute bottom-0 left-0 right-0 z-20 overflow-hidden">
         {/* Gold top line */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-pe-solar-400/50 to-transparent" />

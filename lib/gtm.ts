@@ -1,5 +1,5 @@
 // ========================================
-// Plus Energy — GTM DataLayer Helpers
+// Plus Energy: GTM DataLayer Helpers
 // ========================================
 
 declare global {

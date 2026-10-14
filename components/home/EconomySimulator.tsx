@@ -9,7 +9,7 @@ import { trackSimulatorInteraction, trackSimulatorAutoTrigger, trackCtaClick } f
 
 const IDLE_DELAY = 3000;
 
-// Arc SVG params — 270-degree arc, gap at bottom
+// Arc SVG params: 270-degree arc, gap at bottom
 const R = 80;
 const CX = 100;
 const CY = 105;
@@ -90,7 +90,7 @@ export function EconomySimulator() {
 
   return (
     <section className="relative py-[var(--section-py-mobile)] lg:py-[var(--section-py)] overflow-hidden">
-      {/* Background — placas solares */}
+      {/* Background: placas solares */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/imagens-placas.png"
@@ -105,7 +105,7 @@ export function EconomySimulator() {
         className="absolute inset-0 pointer-events-none"
         style={{ background: "rgba(255,255,255,0.60)" }}
       />
-      {/* Sun glow — warm gold burst from top center */}
+      {/* Sun glow: warm gold burst from top center */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -152,7 +152,7 @@ export function EconomySimulator() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="grid lg:grid-cols-2 rounded-3xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.5)]"
         >
-          {/* ── Left — circular display + slider ── */}
+          {/* ── Left: circular display + slider ── */}
           <div
             className="relative p-8 lg:p-10 flex flex-col items-center"
             style={{
@@ -245,7 +245,7 @@ export function EconomySimulator() {
             </p>
           </div>
 
-          {/* ── Right — savings result ── */}
+          {/* ── Right: savings result ── */}
           <div
             className="relative p-8 lg:p-10 flex flex-col justify-between"
             style={{ background: "linear-gradient(135deg, #0a1a0a 0%, #0f2a0f 60%, #102000 100%)" }}

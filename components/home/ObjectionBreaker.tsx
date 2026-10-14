@@ -14,10 +14,10 @@ import { ShieldCheck, DoorOpen, RefreshCw, BadgeCheck } from "lucide-react";
    ───────────────────────────────────────────────────────────── */
 
 const RIVE_FILES = [
-  { src: null as string | null, stateMachine: null as string | null }, // card 0 — shield
-  { src: null as string | null, stateMachine: null as string | null }, // card 1 — door
-  { src: null as string | null, stateMachine: null as string | null }, // card 2 — cycle
-  { src: null as string | null, stateMachine: null as string | null }, // card 3 — badge
+  { src: null as string | null, stateMachine: null as string | null }, // card 0: shield
+  { src: null as string | null, stateMachine: null as string | null }, // card 1: door
+  { src: null as string | null, stateMachine: null as string | null }, // card 2: cycle
+  { src: null as string | null, stateMachine: null as string | null }, // card 3: badge
 ];
 
 const fallbackIcons = [ShieldCheck, DoorOpen, RefreshCw, BadgeCheck];

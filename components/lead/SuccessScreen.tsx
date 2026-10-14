@@ -58,7 +58,7 @@ export function SuccessScreen({ billValue, onClose }: SuccessScreenProps) {
         </p>
       </div>
 
-      {/* Handoff para o WhatsApp oficial — CTA principal da tela */}
+      {/* Handoff para o WhatsApp oficial: CTA principal da tela */}
       <motion.a
         href={whatsappUrl}
         target="_blank"

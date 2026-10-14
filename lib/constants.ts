@@ -1,5 +1,5 @@
 // ========================================
-// Plus Energy — Constants & Data
+// Plus Energy: Constants & Data
 // ========================================
 
 export const COMPANY = {
@@ -24,7 +24,7 @@ export const MAX_BILL = 5000;
 export const DEFAULT_BILL = 500;
 export const TIER_LIMIT = 400;
 // Mesmo corte do formulário nativo do Meta ("Até R$400" é a faixa que não segue).
-// Abaixo disso o funil do site não chega ao WhatsApp — decisão de 2026-08-08.
+// Abaixo disso o funil do site não chega ao WhatsApp: decisão de 2026-08-08.
 export const MIN_QUALIFIED_BILL = 400;
 
 export function discountRateFor(billValue: number) {
@@ -170,7 +170,7 @@ export const FAQ_DATA = [
   {
     question: "Posso fazer para mais de uma conta?",
     answer:
-      "Sim! É feito um contrato para cada unidade consumidora.",
+      "Sim. É feito um contrato para cada unidade consumidora.",
   },
   {
     question: "Funciona para empresa (CNPJ)?",

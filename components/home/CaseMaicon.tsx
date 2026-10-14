@@ -51,7 +51,7 @@ function FeaturedCard({ c }: { c: Case }) {
           </div>
         </div>
 
-        {/* Right — testimonial */}
+        {/* Right: testimonial */}
         <div className="relative p-7 flex flex-col justify-between"
           style={{ background: "linear-gradient(135deg, #0a1a0a 0%, #0f2a0f 60%, #1a2a00 100%)" }}>
           <div aria-hidden="true" className="pointer-events-none absolute inset-0"
@@ -108,7 +108,7 @@ export function CaseMaicon() {
           </p>
         </motion.div>
 
-        {/* Bento — unified panel */}
+        {/* Bento: unified panel */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
