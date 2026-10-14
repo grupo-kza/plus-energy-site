@@ -162,8 +162,8 @@ export function EnvironmentalImpact() {
                   <CheckCircle2 className="w-4 h-4 text-pe-green-600" />
                 </div>
                 <div>
-                  <p className="text-[10px] text-pe-slate-400 leading-none">Economia</p>
-                  <p className="text-xs font-bold text-pe-green-600 leading-tight">até 25%</p>
+                  <p className="text-[10px] text-pe-slate-400 leading-none">25% de desconto</p>
+                  <p className="text-xs font-bold text-pe-green-600 leading-tight">sobre a compensada</p>
                 </div>
               </motion.div>
 

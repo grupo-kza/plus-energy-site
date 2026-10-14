@@ -38,7 +38,7 @@ export function ComoFuncionaClient() {
           <span className="gold-gradient-text">por assinatura</span>
         </h1>
         <p className="text-white/50 text-lg max-w-2xl mx-auto">
-          Em 5 passos você passa a ter até 25% de desconto sobre a energia compensada da conta de luz
+          Em 5 passos você passa a ter 25% de desconto sobre a energia compensada da conta de luz
           sem instalar nada no seu imóvel.
         </p>
       </section>

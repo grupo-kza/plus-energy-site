@@ -18,18 +18,17 @@ export const COMPANY = {
 
 // Régua da Plus (voz travada com o Lucas em 19/08/2026, skill plus-energy-voz):
 // o desconto vale só sobre a energia compensada, nunca sobre a fatura inteira.
-// Conta de R$ 300 a R$ 400 = 20%. Acima de R$ 400 = 25%. Abaixo de R$ 300 a Plus não atende.
+// 25% fixo sobre a energia compensada, igual ao contrato, a partir de R$ 300 (decisão 2e27525e-4c9,
+// 14/10/2026; antes era 20% de R$ 300 a 400). Abaixo de R$ 300 a Plus não atende.
+// Nunca escrever "25% na conta" nem "25% de desconto" solto: sempre "sobre a energia compensada".
 export const MIN_BILL = 300;
 export const MAX_BILL = 5000;
 export const DEFAULT_BILL = 500;
-export const TIER_LIMIT = 400;
 // Abaixo disso o funil do site não chega ao WhatsApp. Era R$ 400 (08/08/2026);
 // o Lucas abriu para R$ 300 em 14/10/2026 (decisão 2efe03a5-424), igual à régua.
 export const MIN_QUALIFIED_BILL = MIN_BILL;
 
-export function discountRateFor(billValue: number) {
-  return billValue > TIER_LIMIT ? 0.25 : 0.2;
-}
+export const DISCOUNT_RATE = 0.25;
 
 // Quanto da conta vira energia compensada. O resto segue com a RGE: mínimo da ligação,
 // iluminação pública e encargos. Estimativa feita com a memória de cálculo do gerador de
@@ -55,7 +54,7 @@ export function compensatedShare(billValue: number) {
 }
 
 export function calculateSavings(billValue: number) {
-  const rate = discountRateFor(billValue);
+  const rate = DISCOUNT_RATE;
   const compensated = billValue * compensatedShare(billValue);
   // Valor redondo: é estimativa, a conta real decide.
   const monthly = Math.round(compensated * rate);
@@ -189,7 +188,7 @@ export const FAQ_DATA = [
   {
     question: "Qual o desconto exato?",
     answer:
-      "É de 20% para contas de R$ 300 a R$ 400 e de 25% para contas acima de R$ 400, sempre sobre a energia compensada (a parte da conta que a usina da Plus Energy abate). O mínimo da ligação, a iluminação pública e os encargos seguem com a RGE, por isso a economia na fatura inteira fica menor que o percentual. O valor exato sai da simulação com a sua conta.",
+      "É 25% sobre a energia compensada (a parte da conta que a usina da Plus Energy abate), para qualquer conta a partir de R$ 300. Imposto, iluminação pública e taxas não têm desconto e seguem com a RGE, por isso a economia na fatura inteira fica menor que 25%. O valor exato sai da simulação com a sua conta.",
   },
 ] as const;
 

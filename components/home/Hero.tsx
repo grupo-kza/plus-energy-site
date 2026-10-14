@@ -9,7 +9,7 @@ const tickerItems = [
   { icon: Ban, text: "Sem taxa de adesão" },
   { icon: Unlock, text: "Sem multa para sair" },
   { icon: Smartphone, text: "100% Digital" },
-  { icon: BadgePercent, text: "Até 25% na energia compensada" },
+  { icon: BadgePercent, text: "25% sobre a energia compensada" },
   { icon: Zap, text: "Ativação em 30-60 dias" },
   { icon: ShieldCheck, text: "Regulamentado ANEEL" },
 ];
@@ -95,9 +95,8 @@ export function Hero() {
               variants={fadeInUp}
               className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] xl:text-6xl font-extrabold leading-[1.1] text-white"
             >
-              Até{" "}
               <span className="animate-shimmer">25%</span>{" "}
-              de desconto na energia da sua conta de luz,{" "}
+              de desconto sobre a energia compensada da sua conta de luz,{" "}
               <span className="text-pe-solar-400">sem instalar nada</span>
             </motion.h1>
 
@@ -136,8 +135,8 @@ export function Hero() {
             {/* Stats strip: count-up animado */}
             <motion.div custom={5} variants={fadeInUp} className="mt-10 flex items-center gap-8">
               <div className="text-center">
-                <p className="font-heading text-2xl font-extrabold text-pe-solar-400">até 25%</p>
-                <p className="text-xs text-white/50 uppercase tracking-wide mt-0.5">na energia compensada</p>
+                <p className="font-heading text-2xl font-extrabold text-pe-solar-400">25%</p>
+                <p className="text-xs text-white/50 uppercase tracking-wide mt-0.5">sobre a energia compensada</p>
               </div>
               <div className="w-px h-8 bg-white/15" />
               <div className="text-center">

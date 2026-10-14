@@ -80,7 +80,7 @@ export function BillSlider({ value, onChange, showDetails = true }: BillSliderPr
 
           <p className="mt-3 text-xs text-pe-slate-500 leading-snug">
             {savings.ratePercent}% sobre a energia compensada (cerca de {formatCurrency(savings.compensated)} da sua conta).
-            O mínimo da ligação, a iluminação pública e os encargos seguem com a RGE.
+            Imposto, iluminação pública e taxas não têm desconto e seguem com a RGE.
           </p>
         </>
       )}

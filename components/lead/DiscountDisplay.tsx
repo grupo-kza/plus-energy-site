@@ -22,7 +22,7 @@ export function DiscountDisplay({ billValue }: DiscountDisplayProps) {
     >
       <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 bg-pe-green-100 text-pe-green-800 rounded-full text-sm font-semibold">
         <TrendingDown className="w-4 h-4" />
-        {savings.ratePercent}% na energia compensada
+        {savings.ratePercent}% sobre a energia compensada
       </div>
 
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4 mt-4">

@@ -73,7 +73,7 @@ export function CoverageMap() {
               Nascemos no RS, operamos no RS. Nossa energia solar chega até você
               pela rede <strong className="text-black font-semibold">RGE (CPFL)</strong>,
               sem obra e sem instalação, com{" "}
-              <strong className="text-black font-semibold">até 25% de desconto</strong>{" "}
+              <strong className="text-black font-semibold">25% de desconto</strong>{" "}
               sobre a energia compensada, todo mês.
             </p>
 

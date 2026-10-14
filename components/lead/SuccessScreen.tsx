@@ -54,7 +54,7 @@ export function SuccessScreen({ billValue, onClose }: SuccessScreenProps) {
           <span className="text-sm font-normal text-pe-slate-500">/mês</span>
         </p>
         <p className="text-xs text-pe-slate-400 mt-1">
-          {savings.ratePercent}% sobre a energia compensada. O valor exato vem na simulação com a sua conta.
+          {savings.ratePercent}% sobre a energia compensada. Imposto, iluminação pública e taxas não têm desconto. O valor exato vem na simulação com a sua conta.
         </p>
       </div>
 

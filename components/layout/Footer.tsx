@@ -119,7 +119,7 @@ export function Footer() {
                 {COMPANY.tagline}
               </p>
               <p className="text-sm leading-relaxed text-pe-slate-400">
-                Até 25% de desconto sobre a energia compensada da sua conta de luz, sem instalar nada.
+                25% de desconto sobre a energia compensada da sua conta de luz, sem instalar nada.
                 Energia limpa direto da usina solar para o seu medidor,
                 regulamentado pela ANEEL.
               </p>

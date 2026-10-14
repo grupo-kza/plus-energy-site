@@ -86,7 +86,7 @@ export function JsonLd({ type }: JsonLdProps) {
       "@id": `${BASE_URL}/#organization`,
       name: COMPANY.name,
       description:
-        "Energia solar por assinatura com até 25% de desconto sobre a energia compensada da conta de luz. Sem instalação e sem multa para sair. Regulamentado pela Lei 14.300/2022 (ANEEL).",
+        "Energia solar por assinatura com 25% de desconto sobre a energia compensada da conta de luz. Sem instalação e sem multa para sair. Regulamentado pela Lei 14.300/2022 (ANEEL).",
       url: BASE_URL,
       telephone: `+${COMPANY.whatsapp}`,
       email: COMPANY.email,
@@ -117,7 +117,7 @@ export function JsonLd({ type }: JsonLdProps) {
       "@type": "HowTo",
       name: "Como funciona a energia solar por assinatura da Plus Energy",
       description:
-        "Em 5 passos você passa a ter até 25% de desconto sobre a energia compensada da conta de luz, sem instalar nada. Processo 100% digital regulamentado pela Lei 14.300/2022.",
+        "Em 5 passos você passa a ter 25% de desconto sobre a energia compensada da conta de luz, sem instalar nada. Processo 100% digital regulamentado pela Lei 14.300/2022.",
       totalTime: "PT30D",
       estimatedCost: {
         "@type": "MonetaryAmount",
@@ -136,7 +136,7 @@ export function JsonLd({ type }: JsonLdProps) {
       "@type": "Service",
       name: "Energia Solar por Assinatura para Empresas",
       description:
-        "Desconto de até 25% sobre a energia compensada da conta de luz CNPJ, sem instalação, sem obra e sem multa para sair. Energia solar por assinatura regulamentada pela Lei 14.300/2022 (ANEEL) para comércios e empresas no Rio Grande do Sul.",
+        "Desconto de 25% sobre a energia compensada da conta de luz CNPJ, sem instalação, sem obra e sem multa para sair. Energia solar por assinatura regulamentada pela Lei 14.300/2022 (ANEEL) para comércios e empresas no Rio Grande do Sul.",
       provider: {
         "@type": "Organization",
         name: COMPANY.name,
@@ -153,7 +153,7 @@ export function JsonLd({ type }: JsonLdProps) {
       },
       offers: {
         "@type": "Offer",
-        description: "Desconto de até 25% sobre a energia compensada. Sem taxa de adesão.",
+        description: "Desconto de 25% sobre a energia compensada. Sem taxa de adesão.",
         priceCurrency: "BRL",
         url: `${BASE_URL}/para-empresas`,
         availability: "https://schema.org/InStock",

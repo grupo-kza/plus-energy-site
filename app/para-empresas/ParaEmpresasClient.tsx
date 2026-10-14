@@ -25,7 +25,7 @@ import { LeadCta } from "@/components/ui/LeadCta";
 /* ── data ── */
 
 const stats = [
-  { value: "até 25%", label: "sobre a energia compensada" },
+  { value: "25%", label: "sobre a energia compensada" },
   { value: "R$ 0", label: "de adesão e de obra" },
   { value: "90 dias", label: "de aviso para sair, sem multa" },
 ];
@@ -61,7 +61,7 @@ const steps = [
 ];
 
 const benefits = [
-  { icon: TrendingDown, title: "Até 25% de desconto", desc: "Sobre a energia compensada da conta CNPJ, todo mês, sem obra." },
+  { icon: TrendingDown, title: "25% sobre a energia compensada", desc: "Na conta CNPJ, todo mês, sem obra. Imposto, iluminação pública e taxas não têm desconto." },
   { icon: Zap, title: "Sem interrupção", desc: "A energia continua vindo da rede RGE normalmente. Nada muda na operação." },
   { icon: Shield, title: "Regulamentado pela ANEEL", desc: "Operamos sob a Lei 14.300/2022. Contrato digital, sem burocracia." },
   { icon: Building2, title: "Ideal para qualquer porte", desc: "Atendemos de pequenos comércios a grandes indústrias com conta RGE." },

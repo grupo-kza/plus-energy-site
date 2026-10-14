@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s | Plus Energy",
   },
   description:
-    "Sem multa para sair e sem obra: até 25% de desconto sobre a energia compensada da conta de luz. Energia solar por assinatura no RS.",
+    "Sem multa para sair e sem obra: 25% de desconto sobre a energia compensada da conta de luz. Energia solar por assinatura no RS.",
   keywords: [
     "energia solar por assinatura",
     "desconto conta de luz",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Plus Energy | Energia solar por assinatura",
-    description: "Até 25% de desconto sobre a energia compensada, sem instalar nada.",
+    description: "25% de desconto sobre a energia compensada, sem instalar nada.",
   },
   alternates: {
     canonical: "./",

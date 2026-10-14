@@ -1,11 +1,11 @@
-// Confere o simulador contra a régua da Plus (20% de R$ 300 a 400, 25% acima),
+// Confere o simulador contra a régua da Plus (25% fixo a partir de R$ 300),
 // sempre sobre a energia compensada. Rodar: node --experimental-strip-types scripts/simulador-regua.test.ts
 import assert from "node:assert/strict";
 import { calculateSavings } from "../lib/constants.ts";
 
 const casos: Array<[number, number]> = [
-  [300, 20],
-  [400, 20],
+  [300, 25],
+  [400, 25],
   [401, 25],
   [500, 25],
   [5000, 25],

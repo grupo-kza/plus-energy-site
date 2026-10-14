@@ -226,7 +226,7 @@ export function EconomySimulator() {
             {/* Como a conta se divide */}
             <div className="grid grid-cols-3 gap-3 w-full">
               {[
-                { value: `${savings.ratePercent}%`, label: "de desconto na energia compensada" },
+                { value: `${savings.ratePercent}%`, label: "de desconto sobre a energia compensada" },
                 { value: `~${formatCurrency(savings.compensated).replace(",00", "")}`, label: "energia compensada (com desconto)" },
                 { value: `~${formatCurrency(savings.stayWithRge).replace(",00", "")}`, label: "segue com a RGE (mínimo, iluminação, encargos)" },
               ].map(({ value, label }) => (
@@ -241,7 +241,7 @@ export function EconomySimulator() {
               ))}
             </div>
             <p className="mt-4 text-[11px] text-pe-slate-500 text-center leading-snug">
-              Contas de R$ 300 a R$ 400: 20%. Acima de R$ 400: 25%.
+              Valor aproximado. Imposto, iluminação pública e taxas não têm desconto.
             </p>
           </div>
 
