@@ -1,6 +1,6 @@
 /* Páginas de venda da Plus Energy (sprint F9): simulador, formulário e rastreio.
- * Régua da voz Plus (a mesma do simulador do site no PR #4): 20% de R$ 300 a 400, 25% acima,
- * só sobre a energia compensada. A fatia compensada (54% a 68% da conta) vem da memória de
+ * Régua da Plus (a mesma do simulador do site no PR #4): 25% fixo sobre a energia compensada,
+ * a partir de R$ 300, igual ao contrato (decisão 2e27525e-4c9). A fatia compensada (54% a 68% da conta) vem da memória de
  * cálculo do gerador de proposta, tarifas RGE (Resolução ANEEL 3.473/2025). Teste: npm run test:lp */
 (function (root) {
   "use strict";
@@ -11,10 +11,9 @@
   var CRM_ENDPOINT = "https://app.siteup.com.br/api/leads/capture/plus-energy-site";
   var WHATSAPP = "5554997150494";
   var MIN_BILL = 300;
-  var TIER_LIMIT = 400;
   var SHARE = [[300, 0.54], [800, 0.55], [1500, 0.6], [2600, 0.65], [5000, 0.68]];
 
-  function rateFor(bill) { return bill > TIER_LIMIT ? 0.25 : 0.2; }
+  var RATE = 0.25;
   function share(bill) {
     if (bill <= SHARE[0][0]) return SHARE[0][1];
     for (var i = 1; i < SHARE.length; i++) {
@@ -24,7 +23,7 @@
     return SHARE[SHARE.length - 1][1];
   }
   function calc(bill) {
-    var rate = rateFor(bill);
+    var rate = RATE;
     var compensated = bill * share(bill);
     var monthly = Math.round(compensated * rate);
     return {
@@ -34,7 +33,7 @@
     };
   }
 
-  root.PlusCalc = { calc: calc, MIN_BILL: MIN_BILL, TIER_LIMIT: TIER_LIMIT };
+  root.PlusCalc = { calc: calc, MIN_BILL: MIN_BILL, RATE: RATE };
   if (typeof document === "undefined") return; // node (teste)
 
   var brl = function (n) { return "R$ " + Math.round(n).toLocaleString("pt-BR"); };
