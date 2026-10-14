@@ -5,9 +5,10 @@
 (function (root) {
   "use strict";
 
-  // Destino do formulário: entrada do site na conta 13 do SiteUP CRM.
+  // Destino do formulário: entrada "plus-energy-site" da conta 13 do SiteUP CRM (caixa 269, WhatsApp da Plus).
+  // Sem token; o CRM só aceita as origens plusenergy.net.br e vercel.app. O contato é casado pelo telefone.
   // Vazio = nada é gravado: o lead só existe se a pessoa mandar a mensagem no WhatsApp.
-  var CRM_ENDPOINT = "";
+  var CRM_ENDPOINT = "https://app.siteup.com.br/api/leads/capture/plus-energy-site";
   var WHATSAPP = "5554997150494";
   var MIN_BILL = 300;
   var TIER_LIMIT = 400;
