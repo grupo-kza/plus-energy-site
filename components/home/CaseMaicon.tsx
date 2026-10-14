@@ -64,7 +64,7 @@ function FeaturedCard({ c }: { c: Case }) {
             <blockquote className="text-base text-white/90 leading-relaxed font-light italic">
               &ldquo;{c.testimonial}&rdquo;
             </blockquote>
-            <p className="mt-4 text-xs text-pe-solar-400/70">&mdash; {c.name}, {c.company}</p>
+            <p className="mt-4 text-xs text-pe-solar-400/70">{c.name}, {c.company}</p>
           </div>
           <div className="relative z-10 mt-6 pt-5 border-t border-white/10">
             <p className="text-[10px] text-white/40 uppercase tracking-widest mb-1">Economizado em {c.months} meses</p>

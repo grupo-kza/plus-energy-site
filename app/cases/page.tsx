@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { CASES } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Cases — Clientes que Economizam com a Plus Energy",
+  title: "Cases: quem economiza com a Plus Energy",
   description: "O caso do Mercado e Açougue RK, em Marcelino Ramos, cliente da Plus Energy no RS.",
 };
 

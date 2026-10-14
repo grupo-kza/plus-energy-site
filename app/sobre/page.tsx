@@ -123,8 +123,8 @@ export default function SobrePage() {
             <p><strong className="text-black font-semibold">Razão social:</strong> Plus Energy</p>
             <p><strong className="text-black font-semibold">CNPJ:</strong> 51.181.561/0001-75</p>
             <p><strong className="text-black font-semibold">Responsável legal:</strong> Daiana Costenaro Stolarski da Rosa</p>
-            <p><strong className="text-black font-semibold">Foro legal:</strong> Marcelino Ramos — RS</p>
-            <p><strong className="text-black font-semibold">Área de atuação:</strong> Rio Grande do Sul — rede distribuidora RGE (CPFL)</p>
+            <p><strong className="text-black font-semibold">Foro legal:</strong> Marcelino Ramos, RS</p>
+            <p><strong className="text-black font-semibold">Área de atuação:</strong> Rio Grande do Sul, rede distribuidora RGE (CPFL)</p>
             <p><strong className="text-black font-semibold">Regulamentação:</strong> Lei 14.300 de 2022 (ANEEL)</p>
           </div>
         </div>

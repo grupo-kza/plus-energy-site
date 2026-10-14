@@ -26,11 +26,11 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://plusenergy.net.br"),
   title: {
-    default: "Plus Energy — Energia Solar por Assinatura | Até 25% de Desconto",
+    default: "Plus Energy | Energia Solar por Assinatura no RS",
     template: "%s | Plus Energy",
   },
   description:
-    "Até 25% de desconto sobre a energia compensada da conta de luz, sem instalar nada. Energia solar por assinatura para casas e empresas no RS. Sem obra, sem taxa de adesão e sem multa para sair.",
+    "Sem multa para sair e sem obra: até 25% de desconto sobre a energia compensada da conta de luz. Energia solar por assinatura no RS.",
   keywords: [
     "energia solar por assinatura",
     "desconto conta de luz",
@@ -46,15 +46,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: "Plus Energy",
-    title: "Plus Energy — Até 25% de Desconto na Conta de Luz",
+    title: "Plus Energy | Energia solar por assinatura no RS",
     description:
       "Energia solar por assinatura. Sem instalar nada, sem taxa de adesão e sem multa para sair. 100% digital.",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Plus Energy — Energia Solar por Assinatura",
-    description: "Até 25% de desconto na conta de luz sem instalar nada.",
+    title: "Plus Energy | Energia solar por assinatura",
+    description: "Até 25% de desconto sobre a energia compensada, sem instalar nada.",
   },
   alternates: {
     canonical: "./",

@@ -7,8 +7,8 @@ export const COMPANY = {
   tagline: "Energia solar por assinatura",
   cnpj: "51.181.561/0001-75",
   responsible: "Daiana Costenaro Stolarski da Rosa",
-  legalForum: "Marcelino Ramos — RS",
-  coverage: "Rio Grande do Sul — rede distribuidora RGE (CPFL)",
+  legalForum: "Marcelino Ramos, RS",
+  coverage: "Rio Grande do Sul, rede distribuidora RGE (CPFL)",
   regulation: "Lei 14.300 de 2022 (ANEEL)",
   whatsapp: "5554997150494",
   whatsappMessage: "Olá! Vi o site da Plus Energy e quero saber mais sobre o desconto na conta de luz.",
@@ -108,7 +108,7 @@ export const HOW_IT_WORKS_STEPS = [
   {
     step: 5,
     title: "Pagamento simplificado",
-    description: "Você paga um único boleto da Plus Energy, já com o desconto aplicado.",
+    description: "Você paga um único boleto da Plus Energy. Quando o desconto começa, ele já vem aplicado nesse boleto.",
     icon: "Receipt",
   },
 ] as const;
@@ -116,14 +116,14 @@ export const HOW_IT_WORKS_STEPS = [
 export const CASE_MAICON = {
   name: "Maicon",
   company: "Mercado e Açougue RK LTDA",
-  location: "Marcelino Ramos — RS",
+  location: "Marcelino Ramos, RS",
   previousBill: 3785.54,
   currentBill: 2998.90,
   totalSavings: 5677.91,
   months: 8,
   testimonial:
     "Muito contente com nossa parceria que já conseguimos economizar R$5.677,91 em 8 meses!! Grato pela confiança",
-  type: "CNPJ — Trifásico",
+  type: "CNPJ, trifásico",
 } as const;
 
 // Só caso com fonte. Os outros cinco depoimentos que estavam aqui não tinham cliente,
@@ -133,13 +133,13 @@ export const CASES = [
   {
     name: "Maicon R.",
     company: "Mercado e Açougue RK LTDA",
-    location: "Marcelino Ramos — RS",
+    location: "Marcelino Ramos, RS",
     previousBill: 3785.54,
     currentBill: 2998.90,
     totalSavings: 5677.91,
     months: 8,
     testimonial: "Muito contente com nossa parceria que já conseguimos economizar R$5.677,91 em 8 meses!! Grato pela confiança.",
-    type: "Comércio — CNPJ",
+    type: "Comércio, CNPJ",
     initials: "MR",
     image: "/images/cases/maicon.png",
     reviewDate: "2025-06-15",
@@ -155,7 +155,7 @@ export const FAQ_DATA = [
   {
     question: "A conta de luz vai para o nome de vocês?",
     answer:
-      "Sim, a titularidade é transferida para a Plus Energy ou cooperativa parceira. Isso é necessário para a RGE liberar os créditos. Mas você continua ligando para a RGE se faltar luz. Na prática, nada muda no seu dia a dia.",
+      "Sim. A titularidade da conta passa para a Plus Energy, e é isso que libera os créditos da usina na sua conta. A energia continua vindo pela rede da RGE e, se faltar luz, você segue ligando para a RGE.",
   },
   {
     question: "Tem multa para cancelar?",

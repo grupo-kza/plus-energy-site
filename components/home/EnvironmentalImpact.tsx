@@ -72,7 +72,7 @@ export function EnvironmentalImpact() {
             </h2>
 
             <p className="text-pe-slate-500 text-lg leading-relaxed mb-10">
-              Com a Plus Energy, você tem tudo em uma única conta de luz — e o melhor:{" "}
+              Com a Plus Energy, você tem tudo em uma única conta de luz. E o melhor:{" "}
               <strong className="text-black font-semibold">economia todo mês!</strong> Você passa a receber
               a sua Conta Única digital, por WhatsApp e e-mail, mostrando em detalhes quanto você está
               economizando. Sua antiga conta da RGE é paga automaticamente. Sem burocracia, sem obra.
@@ -163,7 +163,7 @@ export function EnvironmentalImpact() {
                 </div>
                 <div>
                   <p className="text-[10px] text-pe-slate-400 leading-none">Economia</p>
-                  <p className="text-xs font-bold text-pe-green-600 leading-tight">25% off</p>
+                  <p className="text-xs font-bold text-pe-green-600 leading-tight">até 25%</p>
                 </div>
               </motion.div>
 

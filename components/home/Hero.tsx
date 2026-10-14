@@ -86,7 +86,7 @@ export function Hero() {
             <motion.div custom={0} variants={fadeInUp} className="mb-6">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/50 border border-pe-solar-500/30 text-xs font-semibold text-pe-solar-400 uppercase tracking-widest backdrop-blur-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-pe-solar-400 animate-pulse" />
-                Energia Solar por Assinatura — RS
+                Energia Solar por Assinatura no RS
               </span>
             </motion.div>
 
@@ -107,8 +107,8 @@ export function Hero() {
               className="mt-6 text-lg md:text-xl text-white/70 max-w-xl leading-relaxed"
             >
               Energia solar por assinatura no RS, para conta RGE ou CPFL. O desconto
-              vale sobre a energia compensada. Sem obra, sem taxa de adesão e sem
-              multa para sair.
+              vale sobre a energia compensada, a parte da conta que a usina da Plus
+              abate. Sem obra, sem taxa de adesão e sem multa para sair.
             </motion.p>
 
             {/* CTAs */}
@@ -129,7 +129,7 @@ export function Hero() {
             <motion.div custom={4} variants={fadeInUp} className="mt-8">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-white/15 text-sm text-white/70 backdrop-blur-sm">
                 <ShieldCheck className="w-4 h-4 text-pe-solar-400 shrink-0" />
-                Regulamentado pela Lei 14.300/2022 &mdash; ANEEL
+                Regulamentado pela Lei 14.300/2022 (ANEEL)
               </span>
             </motion.div>
 

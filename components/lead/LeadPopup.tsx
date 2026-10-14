@@ -316,7 +316,7 @@ export function LeadPopup() {
                     transition={{ duration: 0.2 }}
                   >
                     <p className="text-sm text-pe-slate-600 mb-4">
-                      Só o WhatsApp — o resto a gente combina na conversa:
+                      Só o WhatsApp. O resto a gente combina na conversa:
                     </p>
                     <LeadForm onSubmit={handleSubmit} isLoading={isLoading} />
                   </motion.div>

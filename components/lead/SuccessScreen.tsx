@@ -74,7 +74,7 @@ export function SuccessScreen({ billValue, onClose }: SuccessScreenProps) {
       </motion.a>
 
       <p className="mt-3 text-xs text-pe-slate-400">
-        A mensagem já vai escrita — é só tocar em enviar.
+        A mensagem já vai escrita: é só tocar em enviar.
       </p>
 
       <button

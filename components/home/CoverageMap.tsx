@@ -11,7 +11,7 @@ const RS_PATH =
 const facts = [
   {
     icon: MapPin,
-    title: "Marcelino Ramos — RS",
+    title: "Marcelino Ramos, RS",
     desc: "Nossa sede e raízes gaúchas",
   },
   {
@@ -22,7 +22,7 @@ const facts = [
   {
     icon: ShieldCheck,
     title: "Regulamentado pela ANEEL",
-    desc: "Lei 14.300/2022 — operamos dentro da lei",
+    desc: "Lei 14.300/2022: operamos dentro da lei",
   },
   {
     icon: Building2,
@@ -71,10 +71,10 @@ export function CoverageMap() {
 
             <p className="text-pe-slate-500 text-lg leading-relaxed mb-10">
               Nascemos no RS, operamos no RS. Nossa energia solar chega até você
-              pela rede <strong className="text-black font-semibold">RGE (CPFL)</strong> —
-              sem obra, sem instalação, e com{" "}
-              <strong className="text-black font-semibold">25% de desconto</strong>{" "}
-              na conta todo mês.
+              pela rede <strong className="text-black font-semibold">RGE (CPFL)</strong>,
+              sem obra e sem instalação, com{" "}
+              <strong className="text-black font-semibold">até 25% de desconto</strong>{" "}
+              sobre a energia compensada, todo mês.
             </p>
 
             {/* Fact list */}

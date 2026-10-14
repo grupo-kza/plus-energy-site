@@ -117,7 +117,7 @@ export function JsonLd({ type }: JsonLdProps) {
       "@type": "HowTo",
       name: "Como funciona a energia solar por assinatura da Plus Energy",
       description:
-        "Em 5 passos simples você começa a economizar até 25% na conta de luz sem instalar nada. Processo 100% digital regulamentado pela Lei 14.300/2022.",
+        "Em 5 passos você passa a ter até 25% de desconto sobre a energia compensada da conta de luz, sem instalar nada. Processo 100% digital regulamentado pela Lei 14.300/2022.",
       totalTime: "PT30D",
       estimatedCost: {
         "@type": "MonetaryAmount",
