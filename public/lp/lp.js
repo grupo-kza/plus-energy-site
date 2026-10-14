@@ -1,11 +1,12 @@
 /* Páginas de venda da Plus Energy (sprint F9): simulador, formulário e rastreio.
- * Régua igual a lib/constants.ts: 20% de R$ 300 a 400, 25% acima, só sobre a energia compensada.
- * Teste: npm run test:simulador (confere esta conta e a do site). */
+ * Régua da voz Plus (a mesma do simulador do site no PR #4): 20% de R$ 300 a 400, 25% acima,
+ * só sobre a energia compensada. A fatia compensada (54% a 68% da conta) vem da memória de
+ * cálculo do gerador de proposta, tarifas RGE (Resolução ANEEL 3.473/2025). Teste: npm run test:lp */
 (function (root) {
   "use strict";
 
   // Destino do formulário: entrada do site na conta 13 do SiteUP CRM.
-  // Vazio = o formulário só abre o WhatsApp com a mensagem pronta (nada se perde).
+  // Vazio = nada é gravado: o lead só existe se a pessoa mandar a mensagem no WhatsApp.
   var CRM_ENDPOINT = "";
   var WHATSAPP = "5554997150494";
   var MIN_BILL = 300;
@@ -108,7 +109,9 @@
     if (billField) billField.addEventListener("input", function () { billField.dataset.touched = "1"; });
     var phone = form.querySelector("[name=whatsapp]");
     if (phone) phone.addEventListener("input", function () {
-      var d = phone.value.replace(/\D/g, "").slice(0, 11);
+      var d = phone.value.replace(/\D/g, "");
+      if (d.length > 11 && d.indexOf("55") === 0) d = d.slice(2); // colou com +55
+      d = d.slice(0, 11);
       phone.value = d.length > 6 ? "(" + d.slice(0, 2) + ") " + d.slice(2, d.length - 4) + "-" + d.slice(-4)
         : d.length > 2 ? "(" + d.slice(0, 2) + ") " + d.slice(2) : d;
     });
@@ -122,6 +125,7 @@
       msg.hidden = true;
       var nome = form.nome.value.trim();
       var digits = form.whatsapp.value.replace(/\D/g, "");
+      if (digits.length > 11 && digits.indexOf("55") === 0) digits = digits.slice(2);
       var conta = Number(String(form.valor_conta.value).replace(/\./g, "").replace(",", "."));
       var dist = form.distribuidora.value;
       if (nome.length < 2) return fail("Escreve teu nome para a gente te chamar.");
@@ -142,24 +146,49 @@
       KEYS.forEach(function (k) { payload[k] = track[k]; });
       payload.utm_content = track.utm_content || variant;
 
-      push("generate_lead", { event_id: eventId, lead_phone: "55" + digits, bill_value: conta, distributor: dist, value: r.monthly, currency: "BRL" });
+      // Lead só conta quando existe de verdade: gravado no CRM ou, sem CRM, quando a pessoa abre o WhatsApp.
+      var leadEvent = { event_id: eventId, lead_phone: "55" + digits, bill_value: conta, distributor: dist, value: r.monthly, currency: "BRL" };
+      var leadSent = false;
+      function sendLead() { if (!leadSent) { leadSent = true; push("generate_lead", leadEvent); } }
 
       var done = function () {
         var text = "Oi! Sou " + nome + ". Minha conta de luz fica em torno de " + brl(conta) + " (" + dist + "). Quero a simulação da Plus Energy. (ref: lp_" + page + ")";
         var box = document.querySelector("[data-done]");
         box.querySelector("[data-done-wa]").setAttribute("href", waLink(text));
-        box.querySelector("[data-done-wa]").addEventListener("click", function () { push("whatsapp_click", { cta_location: "lp_form_done" }); });
+        box.querySelector("[data-done-wa]").addEventListener("click", function () {
+          sendLead();
+          push("whatsapp_click", { cta_location: "lp_form_done" });
+        });
         form.hidden = true;
         box.hidden = false;
-        push("lead_conversion", { event_id: eventId });
+        box.scrollIntoView({ behavior: "smooth", block: "center" });
+        var h = box.querySelector("h3"); if (h) h.focus({ preventScroll: true });
       };
 
       if (!CRM_ENDPOINT) return done();
       var btn = form.querySelector("button[type=submit]");
       btn.disabled = true;
       fetch(CRM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload), keepalive: true })
+        .then(function (res) { if (res.ok) sendLead(); })
         .catch(function () { /* o WhatsApp segue como caminho */ })
         .then(function () { btn.disabled = false; done(); });
+    });
+  }
+
+  // Banner de cookies (Consent Mode v2: começa negado no <head>)
+  var cookie = document.querySelector("[data-cookie]");
+  if (cookie) {
+    var stored = null;
+    try { stored = localStorage.getItem("pe_consent"); } catch (e) {}
+    if (!stored) cookie.hidden = false;
+    cookie.querySelectorAll("[data-consent]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var c = b.getAttribute("data-consent");
+        try { localStorage.setItem("pe_consent", c); } catch (e) {}
+        window.gtag && window.gtag("consent", "update", { ad_storage: c, ad_user_data: c, ad_personalization: c, analytics_storage: c });
+        push("consent_update", { consent_choice: c });
+        cookie.hidden = true;
+      });
     });
   }
 
