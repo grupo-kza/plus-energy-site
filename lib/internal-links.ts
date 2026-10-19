@@ -32,7 +32,7 @@ const INTERNAL_LINKS: InternalLink[] = [
   },
   {
     terms: ["para empresas", "conta cnpj", "energia para empresas"],
-    href: "/para-empresas",
+    href: "/empresas",
     title: "Energia solar para empresas",
   },
   {

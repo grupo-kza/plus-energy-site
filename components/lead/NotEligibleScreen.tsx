@@ -7,9 +7,15 @@ import { MIN_QUALIFIED_BILL } from "@/lib/constants";
 
 interface NotEligibleScreenProps {
   onClose: () => void;
+  /** Título alternativo (padrão: conta abaixo do mínimo). */
+  title?: string;
+  /** Texto alternativo do motivo. Sem ele, usa o texto do corte de conta. */
+  message?: React.ReactNode;
+  /** Bloco opcional abaixo do motivo (ex.: botão para outro caminho). */
+  action?: React.ReactNode;
 }
 
-export function NotEligibleScreen({ onClose }: NotEligibleScreenProps) {
+export function NotEligibleScreen({ onClose, title, message, action }: NotEligibleScreenProps) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -27,21 +33,27 @@ export function NotEligibleScreen({ onClose }: NotEligibleScreenProps) {
       </motion.div>
 
       <h3 className="text-2xl font-heading font-bold text-pe-slate-900 mb-2">
-        Ainda não é o seu momento
+        {title ?? "Ainda não é o seu momento"}
       </h3>
 
       <p className="text-pe-slate-600 mb-6 max-w-sm mx-auto">
-        Hoje a Plus Energy consegue gerar economia real a partir de contas de luz
-        acima de <strong className="text-pe-slate-800">{formatCurrency(MIN_QUALIFIED_BILL)}/mês</strong>.
-        Abaixo disso, o desconto não compensa o processo.
+        {message ?? (
+          <>
+            Hoje a Plus Energy consegue gerar economia real a partir de contas de luz
+            acima de <strong className="text-pe-slate-800">{formatCurrency(MIN_QUALIFIED_BILL)}/mês</strong>.
+            Abaixo disso, o desconto não compensa o processo.
+          </>
+        )}
       </p>
 
-      <div className="p-4 bg-pe-slate-50 rounded-xl border border-pe-slate-200 mb-6 text-left">
-        <p className="text-sm text-pe-slate-600">
-          Se sua conta variar bastante ao longo do ano, volte aqui num mês de consumo
-          mais alto — ou acompanhe nosso Instagram, avisamos quando o mínimo mudar.
-        </p>
-      </div>
+      {action ?? (
+        <div className="p-4 bg-pe-slate-50 rounded-xl border border-pe-slate-200 mb-6 text-left">
+          <p className="text-sm text-pe-slate-600">
+            Se sua conta variar bastante ao longo do ano, volte aqui num mês de consumo
+            mais alto, ou acompanhe nosso Instagram, avisamos quando o mínimo mudar.
+          </p>
+        </div>
+      )}
 
       <button
         onClick={onClose}

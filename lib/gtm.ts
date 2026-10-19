@@ -80,3 +80,44 @@ export function trackContactSubmit() {
 export function trackContactSuccess() {
   pushEvent("contact_form_success", { form_type: "contato" });
 }
+
+// ── Qualificação por público (/casa e /empresas) ────────────────
+
+/**
+ * Disparado quando a pessoa passa no filtro em etapas, ANTES de abrir o
+ * WhatsApp. Não substitui nem altera o `generate_lead` do popup original.
+ * Cria o dataLayer se o GTM ainda não carregou, para não perder o evento.
+ */
+const firedQualificado = new Set<string>();
+
+/** No máximo 1 disparo por público por sessão do navegador. */
+function alreadyFired(publico: string): boolean {
+  const key = `pe_lq_${publico}`;
+  if (firedQualificado.has(key)) return true;
+  firedQualificado.add(key);
+  try {
+    if (window.sessionStorage.getItem(key)) return true;
+    window.sessionStorage.setItem(key, "1");
+  } catch {
+    // sessionStorage bloqueado: vale o Set em memória
+  }
+  return false;
+}
+
+export function trackLeadQualificado(data: {
+  publico: "casa" | "empresa";
+  faixaConta: string;
+  segmento: string;
+  mediaTensao?: boolean;
+}) {
+  if (typeof window === "undefined") return;
+  if (alreadyFired(data.publico)) return;
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "lead_qualificado",
+    publico: data.publico,
+    faixa_conta: data.faixaConta,
+    segmento: data.segmento,
+    ...(data.mediaTensao !== undefined ? { media_tensao: data.mediaTensao } : {}),
+  });
+}

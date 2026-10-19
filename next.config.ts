@@ -4,6 +4,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/para-empresas",
+        destination: "/empresas",
+        statusCode: 301,
+      },
+      {
         source: "/instagram",
         destination:
           "/?utm_source=instagram&utm_medium=social&utm_campaign=bio_link",

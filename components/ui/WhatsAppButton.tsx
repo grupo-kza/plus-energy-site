@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useQualifyFlow } from "@/lib/qualifyGate";
 import { captureUtms } from "@/lib/whatsapp";
 import { useWhatsAppLink } from "@/lib/useWhatsAppLink";
 import { trackWhatsAppClick } from "@/lib/gtm";
@@ -13,6 +14,11 @@ export function WhatsAppButton() {
   }, []);
 
   const url = useWhatsAppLink({ origin: "site_float", segment: "pf" });
+  const qualifyFlow = useQualifyFlow();
+
+  // Em página com filtro em etapas o WhatsApp só abre depois do filtro:
+  // o botão flutuante daria a volta nele.
+  if (qualifyFlow) return null;
 
   return (
     <a

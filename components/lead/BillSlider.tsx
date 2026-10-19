@@ -9,9 +9,11 @@ interface BillSliderProps {
   value: number;
   onChange: (value: number) => void;
   showDetails?: boolean;
+  /** Rótulo do campo. Padrão mantém o texto do popup original. */
+  label?: string;
 }
 
-export function BillSlider({ value, onChange, showDetails = true }: BillSliderProps) {
+export function BillSlider({ value, onChange, showDetails = true, label = "Valor da sua conta de luz" }: BillSliderProps) {
   const savings = calculateSavings(value);
 
   const handleChange = useCallback(
@@ -28,7 +30,7 @@ export function BillSlider({ value, onChange, showDetails = true }: BillSliderPr
       {/* Slider label */}
       <div className="flex items-center justify-between mb-2">
         <label className="text-sm font-medium text-pe-slate-600">
-          Valor da sua conta de luz
+          {label}
         </label>
         <span className="text-2xl font-heading font-bold text-pe-green-700">
           {formatCurrency(value)}
