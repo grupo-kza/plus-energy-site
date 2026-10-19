@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { captureUtms } from "@/lib/whatsapp";
 import { useWhatsAppLink } from "@/lib/useWhatsAppLink";
 import { trackWhatsAppClick } from "@/lib/gtm";
@@ -13,6 +14,11 @@ export function WhatsAppButton() {
   }, []);
 
   const url = useWhatsAppLink({ origin: "site_float", segment: "pf" });
+  const pathname = usePathname();
+
+  // Nas páginas por público o WhatsApp só abre depois do filtro em etapas:
+  // o botão flutuante daria a volta no filtro.
+  if (pathname === "/casa" || pathname === "/empresas") return null;
 
   return (
     <a

@@ -13,9 +13,25 @@ export type WaOrigin =
   | "site_final_cta" // última seção da home
   | "site_float" // botão flutuante
   | "site_footer" // rodapé
-  | "site_contato"; // página /contato
+  | "site_contato" // página /contato
+  | "casa_filtro" // passou no filtro em etapas da página /casa
+  | "empresa_filtro"; // passou no filtro em etapas da página /empresas
 
 export type WaSegment = "pf" | "pj" | "condominio";
+
+/** Respostas do filtro em etapas das páginas por público (/casa e /empresas). */
+export interface WaQualified {
+  tipo: "casa" | "empresa";
+  /** Faixa da conta já formatada, ex.: "R$ 600 a R$ 999". */
+  faixa: string;
+  cidade: string;
+  /** Segmento do negócio (só empresa), ex.: "Padaria ou restaurante". */
+  segmento?: string;
+  /** Empresa com cabine ou transformador próprio (média tensão). */
+  mediaTensao?: boolean;
+  /** Casa: topou a transferência, mas quer que expliquem melhor. */
+  querEntenderTitularidade?: boolean;
+}
 
 export interface WaLinkParams {
   origin: WaOrigin;
@@ -24,6 +40,8 @@ export interface WaLinkParams {
   name?: string;
   /** Valor médio da conta de luz informado no simulador. */
   billValue?: number;
+  /** Quando presente, a mensagem sai no formato do filtro por público. */
+  qualified?: WaQualified;
 }
 
 const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content"] as const;
@@ -112,12 +130,45 @@ const OPENERS: Record<WaSegment, (firstName?: string) => string> = {
       : "Olá! Vim pelo site da Plus Energy. Cuido de um condomínio e quero simular a economia nas áreas comuns.",
 };
 
+function buildQualifiedMessage(q: WaQualified, ref: string): string {
+  const parts: string[] = [];
+
+  if (q.tipo === "casa") {
+    parts.push("Olá! Vim pela página de casa do site da Plus Energy.");
+    parts.push("Tipo: casa.");
+    parts.push(`Faixa da conta: ${q.faixa} por mês.`);
+    parts.push(`Cidade: ${q.cidade}.`);
+    parts.push("A conta está no meu nome.");
+    parts.push(
+      q.querEntenderTitularidade
+        ? "Aceito a transferência de titularidade por contrato, com a RGE seguindo no fornecimento, mas quero que me expliquem melhor."
+        : "Estou ciente de que a titularidade passa para a Plus por contrato e que a RGE segue no fornecimento.",
+    );
+  } else {
+    parts.push("Olá! Vim pela página de empresas do site da Plus Energy.");
+    parts.push("Tipo: empresa.");
+    if (q.segmento) parts.push(`Segmento: ${q.segmento}.`);
+    parts.push(`Faixa da conta: ${q.faixa} por mês.`);
+    parts.push(`Cidade: ${q.cidade}.`);
+    parts.push("A conta está no CNPJ.");
+    if (q.mediaTensao) {
+      parts.push("Tem cabine ou transformador próprio: média tensão, falar com consultor.");
+    }
+  }
+
+  parts.push(`Quero receber a simulação. (ref: ${ref})`);
+  return parts.join(" ");
+}
+
 /**
  * Monta a mensagem que o LEAD envia. Precisa soar como primeira pessoa —
  * quando não sabemos o valor da conta, deixamos a lacuna pro próprio lead
  * preencher: é o filtro de qualificação mais barato que existe.
  */
 export function buildWhatsAppMessage(params: WaLinkParams, withUtm = true): string {
+  if (params.qualified) {
+    return buildQualifiedMessage(params.qualified, buildRef(params, withUtm));
+  }
   const segment = params.segment ?? "pf";
   const firstName = params.name?.trim().split(" ")[0];
 

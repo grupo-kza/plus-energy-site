@@ -54,7 +54,7 @@ export function calculateSavings(billValue: number) {
 export const NAV_LINKS = [
   { label: "Como Funciona", href: "/como-funciona" },
   { label: "Sobre", href: "/sobre" },
-  { label: "Para Empresas", href: "/para-empresas" },
+  { label: "Para Empresas", href: "/empresas" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },
   { label: "Contato", href: "/contato" },

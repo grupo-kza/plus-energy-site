@@ -155,7 +155,7 @@ export function JsonLd({ type }: JsonLdProps) {
         "@type": "Offer",
         description: "Desconto de até 25% na conta de luz. Sem taxa de adesão.",
         priceCurrency: "BRL",
-        url: `${BASE_URL}/para-empresas`,
+        url: `${BASE_URL}/empresas`,
         availability: "https://schema.org/InStock",
       },
     },
