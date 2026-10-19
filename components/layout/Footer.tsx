@@ -6,6 +6,7 @@ import Image from "next/image"
 import { Instagram, Facebook, Mail, Phone } from "lucide-react"
 import { COMPANY, NAV_LINKS } from "@/lib/constants"
 import { useWhatsAppLink } from "@/lib/useWhatsAppLink"
+import { useQualifyFlow, openQualifyModal } from "@/lib/qualifyGate"
 
 const LEGAL_LINKS = [
   { label: "Política de Privacidade", href: "/politica-de-privacidade" },
@@ -82,6 +83,7 @@ function NewsletterForm() {
 
 export function Footer() {
   const footerWhatsAppUrl = useWhatsAppLink({ origin: "site_footer", segment: "pf" })
+  const qualifyFlow = useQualifyFlow()
 
   return (
     <footer className="relative bg-pe-green-950 text-white overflow-hidden">
@@ -173,15 +175,26 @@ export function Footer() {
               </h3>
               <ul className="space-y-3">
                 <li>
-                  <a
-                    href={footerWhatsAppUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-pe-slate-400 hover:text-pe-solar-400 transition-colors"
-                  >
-                    <Phone className="h-4 w-4" />
-                    WhatsApp
-                  </a>
+                  {qualifyFlow ? (
+                    <button
+                      type="button"
+                      onClick={openQualifyModal}
+                      className="inline-flex items-center gap-2 text-sm text-pe-slate-400 hover:text-pe-solar-400 transition-colors"
+                    >
+                      <Phone className="h-4 w-4" />
+                      WhatsApp
+                    </button>
+                  ) : (
+                    <a
+                      href={footerWhatsAppUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-pe-slate-400 hover:text-pe-solar-400 transition-colors"
+                    >
+                      <Phone className="h-4 w-4" />
+                      WhatsApp
+                    </a>
+                  )}
                 </li>
                 <li>
                   <a

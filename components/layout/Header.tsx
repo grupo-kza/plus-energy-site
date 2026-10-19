@@ -7,6 +7,7 @@ import { Menu, X, ArrowRight } from "lucide-react";
 import { NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { MobileNav } from "./MobileNav";
+import { useQualifyFlow, openQualifyModal } from "@/lib/qualifyGate";
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -21,9 +22,16 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const qualifyFlow = useQualifyFlow();
+
+  // Em página com filtro em etapas, o CTA abre o filtro e não o popup antigo.
   const openLeadPopup = useCallback(() => {
+    if (qualifyFlow) {
+      openQualifyModal();
+      return;
+    }
     window.dispatchEvent(new CustomEvent("open-lead-popup"));
-  }, []);
+  }, [qualifyFlow]);
 
   return (
     <>

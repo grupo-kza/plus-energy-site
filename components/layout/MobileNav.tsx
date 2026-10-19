@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
+import { useQualifyFlow, openQualifyModal } from "@/lib/qualifyGate";
 import Link from "next/link";
 import { X } from "lucide-react";
 import Image from "next/image";
@@ -13,10 +14,16 @@ interface MobileNavProps {
 }
 
 export function MobileNav({ open, onClose }: MobileNavProps) {
+  const qualifyFlow = useQualifyFlow();
+
   const openLeadPopup = useCallback(() => {
     onClose();
+    if (qualifyFlow) {
+      openQualifyModal();
+      return;
+    }
     window.dispatchEvent(new CustomEvent("open-lead-popup"));
-  }, [onClose]);
+  }, [onClose, qualifyFlow]);
 
   return (
     <AnimatePresence>

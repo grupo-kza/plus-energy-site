@@ -33,8 +33,7 @@ type BlockReason =
   | "conta_baixa"
   | "fora_rge"
   | "nao_titular"
-  | "sem_cnpj"
-  | "conta_media_empresa";
+  | "sem_cnpj";
 
 /** Espaço não separável entre "R$" e o valor, só para exibição. */
 const nb = (t: string) => t.replace(/R\$ /g, "R$\u00a0");
@@ -145,12 +144,16 @@ export function QualifyModal({ flow, open, onClose }: QualifyModalProps) {
       });
     } else {
       const faixa = band!.label;
-      trackLeadQualificado({
-        publico: "empresa",
-        faixaConta: faixa,
-        segmento: segment!.label,
-        mediaTensao: opts.mediaTensao,
-      });
+      // Faixa de R$ 400 a R$ 999 segue para o WhatsApp, mas abaixo do corte
+      // de empresa não é lead qualificado: não dispara evento de mídia.
+      if (band!.id !== "400a999") {
+        trackLeadQualificado({
+          publico: "empresa",
+          faixaConta: faixa,
+          segmento: segment!.label,
+          mediaTensao: opts.mediaTensao,
+        });
+      }
       setOutcome({
         kind: "done",
         billSample: band!.sample,
@@ -361,7 +364,6 @@ export function QualifyModal({ flow, open, onClose }: QualifyModalProps) {
                               onClick={() => {
                                 setBand(b);
                                 if (b.id === "ate399") block("conta_baixa");
-                                else if (b.id === "400a999") block("conta_media_empresa");
                                 else next();
                               }}
                             >
@@ -529,24 +531,6 @@ function BlockedView({ reason, onClose }: { reason: BlockReason; onClose: () => 
       />
     );
   }
-
-  // conta de empresa entre 400 e 999
-  return (
-    <NotEligibleScreen
-      onClose={onClose}
-      title="Siga pelo fluxo de casa"
-      message="Para empresa, o desconto compensa a partir de R$ 1.000 por mês. Mas a tua conta passa de R$ 400, então dá para seguir pelo caminho de casa."
-      action={
-        <Link
-          href="/casa"
-          onClick={onClose}
-          className="mb-4 flex w-full items-center justify-center rounded-xl bg-[#15803D] hover:bg-[#166534] py-3.5 px-6 font-heading font-bold text-white transition"
-        >
-          Ir para o fluxo de casa
-        </Link>
-      }
-    />
-  );
 }
 
 function DoneView({

@@ -88,6 +88,22 @@ export function trackContactSuccess() {
  * WhatsApp. Não substitui nem altera o `generate_lead` do popup original.
  * Cria o dataLayer se o GTM ainda não carregou, para não perder o evento.
  */
+const firedQualificado = new Set<string>();
+
+/** No máximo 1 disparo por público por sessão do navegador. */
+function alreadyFired(publico: string): boolean {
+  const key = `pe_lq_${publico}`;
+  if (firedQualificado.has(key)) return true;
+  firedQualificado.add(key);
+  try {
+    if (window.sessionStorage.getItem(key)) return true;
+    window.sessionStorage.setItem(key, "1");
+  } catch {
+    // sessionStorage bloqueado: vale o Set em memória
+  }
+  return false;
+}
+
 export function trackLeadQualificado(data: {
   publico: "casa" | "empresa";
   faixaConta: string;
@@ -95,6 +111,7 @@ export function trackLeadQualificado(data: {
   mediaTensao?: boolean;
 }) {
   if (typeof window === "undefined") return;
+  if (alreadyFired(data.publico)) return;
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     event: "lead_qualificado",

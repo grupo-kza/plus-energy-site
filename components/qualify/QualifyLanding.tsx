@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ShieldCheck, Wrench, Ban, Unlock, ArrowRight } from "lucide-react";
 import { QualifyModal } from "./QualifyModal";
 import { trackCtaClick } from "@/lib/gtm";
+import { OPEN_QUALIFY_EVENT, useRegisterQualifyFlow } from "@/lib/qualifyGate";
 
 type Flow = "casa" | "empresa";
 
@@ -62,6 +63,15 @@ export function QualifyLanding({
   closing,
 }: QualifyLandingProps) {
   const [open, setOpen] = useState(false);
+
+  // Avisa cabeçalho, rodapé e botão flutuante que esta página tem filtro,
+  // e deixa eles abrirem o filtro daqui.
+  useRegisterQualifyFlow(flow);
+  useEffect(() => {
+    const onOpen = () => setOpen(true);
+    window.addEventListener(OPEN_QUALIFY_EVENT, onOpen);
+    return () => window.removeEventListener(OPEN_QUALIFY_EVENT, onOpen);
+  }, []);
 
   return (
     <div className="bg-white overflow-x-hidden">
