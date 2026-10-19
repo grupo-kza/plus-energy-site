@@ -16,7 +16,7 @@ export function CasaClient() {
       bg="/hero-bg.jpg"
       title={
         <>
-          Tua conta de luz passa de R$ 400?{" "}
+          Tua conta de luz passa de R$ 400?{" "}
           <span className="text-pe-solar-400">Dá para pagar menos sem instalar nada.</span>
         </>
       }

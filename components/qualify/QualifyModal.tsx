@@ -36,14 +36,17 @@ type BlockReason =
   | "sem_cnpj"
   | "conta_media_empresa";
 
+/** Espaço não separável entre "R$" e o valor, só para exibição. */
+const nb = (t: string) => t.replace(/R\$ /g, "R$\u00a0");
+
 const CASA_STEPS: CasaStep[] = ["conta", "local", "titular", "ciencia"];
 const EMPRESA_STEPS: EmpresaStep[] = ["negocio", "conta", "cnpj", "cabine", "local"];
 
 const TITLES: Record<Step, string> = {
   // casa
-  conta: "Quanto você paga de luz?",
+  conta: "Quanto tu pagas de luz?",
   local: "Onde fica a conta?",
-  titular: "A conta está no seu nome?",
+  titular: "A conta está no teu nome?",
   ciencia: "Sobre a titularidade",
   // empresa
   negocio: "Qual o tipo de negócio?",
@@ -260,7 +263,7 @@ export function QualifyModal({ flow, open, onClose }: QualifyModalProps) {
                     {/* ───── CASA ───── */}
                     {flow === "casa" && step === "conta" && (
                       <>
-                        <BillSlider value={bill} onChange={setBill} showDetails={false} />
+                        <BillSlider value={bill} onChange={setBill} showDetails={false} label="Valor da tua conta de luz" />
                         <button
                           className={primaryBtn}
                           onClick={() => (bill < MIN_QUALIFIED_BILL ? block("conta_baixa") : next())}
@@ -362,7 +365,7 @@ export function QualifyModal({ flow, open, onClose }: QualifyModalProps) {
                                 else next();
                               }}
                             >
-                              {b.label}
+                              {nb(b.label)}
                             </button>
                           ))}
                         </div>
@@ -389,8 +392,8 @@ export function QualifyModal({ flow, open, onClose }: QualifyModalProps) {
                     {flow === "empresa" && step === "cabine" && (
                       <>
                         <p className="text-sm text-pe-slate-600 mb-4">
-                          Se o terreno tem cabine ou transformador seu, a conta costuma ser de média tensão.
-                          Sem problema, só muda quem conversa com você.
+                          Se o terreno tem cabine ou transformador teu, a conta costuma ser de média tensão.
+                          Sem problema, só muda quem conversa contigo.
                         </p>
                         <div className="space-y-3">
                           <button
@@ -491,7 +494,7 @@ function BlockedView({ reason, onClose }: { reason: BlockReason; onClose: () => 
       <NotEligibleScreen
         onClose={onClose}
         title="Ainda não chegamos aí"
-        message="Hoje atendemos só contas da RGE no Rio Grande do Sul. Se a sua distribuidora for outra, ainda não conseguimos gerar o desconto."
+        message="Hoje atendemos só contas da RGE no Rio Grande do Sul. Se a tua distribuidora for outra, ainda não conseguimos gerar o desconto."
         action={<div className="mb-6" />}
       />
     );
@@ -532,7 +535,7 @@ function BlockedView({ reason, onClose }: { reason: BlockReason; onClose: () => 
     <NotEligibleScreen
       onClose={onClose}
       title="Siga pelo fluxo de casa"
-      message="Para empresa, o desconto compensa a partir de R$ 1.000 por mês. Mas a sua conta passa de R$ 400, então dá para seguir pelo caminho de casa."
+      message="Para empresa, o desconto compensa a partir de R$ 1.000 por mês. Mas a tua conta passa de R$ 400, então dá para seguir pelo caminho de casa."
       action={
         <Link
           href="/casa"
@@ -570,17 +573,17 @@ function DoneView({
   return (
     <div className="text-center pt-4">
       <h3 className="text-2xl font-heading font-bold text-pe-slate-900 mb-2">
-        Dá para atender seu caso
+        Dá para atender o teu caso
       </h3>
       <p className="text-pe-slate-600 mb-5 max-w-sm mx-auto">
         {q.mediaTensao
-          ? "Como tem cabine ou transformador próprio, um consultor vai falar com você. A mensagem já vai escrita."
-          : "Toque no botão e envie a mensagem no WhatsApp. Ela já vai escrita com os seus dados."}
+          ? "Como tem cabine ou transformador próprio, um consultor vai falar contigo. A mensagem já vai escrita."
+          : "Toque no botão e envie a mensagem no WhatsApp. Ela já vai escrita com os teus dados."}
       </p>
 
       <ul className="text-left text-sm text-pe-slate-600 bg-pe-slate-50 border border-pe-slate-200 rounded-xl p-4 mb-5 space-y-1">
         {q.segmento && <li>Segmento: <strong className="text-pe-slate-800">{q.segmento}</strong></li>}
-        <li>Conta: <strong className="text-pe-slate-800">{q.faixa}</strong></li>
+        <li>Conta: <strong className="text-pe-slate-800">{nb(q.faixa)}</strong></li>
         <li>Cidade: <strong className="text-pe-slate-800">{q.cidade}</strong></li>
       </ul>
 
