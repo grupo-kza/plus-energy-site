@@ -89,11 +89,11 @@ export function EmpresasClient() {
       bg="/images/solar-farm-bg.jpg"
       title={
         <>
-          A tua empresa recebe energia da RGE?{" "}
-          <span className="text-pe-solar-400">Ela pode pagar até 25% menos pela energia que consome.</span>
+          Teu negócio não pode desligar a luz.{" "}
+          <span className="text-pe-solar-400">Mas pode pagar até 25% menos pela energia que consome.</span>
         </>
       }
-      subtitle="Energia solar por assinatura, regulada pela Lei 14.300. Sem placa, sem obra e sem parar a operação."
+      subtitle="Freezer, forno e máquina não param, e a RGE reajustou a tarifa de novo em junho. Com energia solar por assinatura, regulada pela Lei 14.300, o desconto vem sem placa e sem obra."
       cta="Simular a economia da empresa"
       points={[
         { icon: "wrench", text: "Sem obra" },
