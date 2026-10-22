@@ -93,7 +93,7 @@ export function EmpresasClient() {
           <span className="text-pe-solar-400">Mas pode pagar até 25% menos pela energia que consome.</span>
         </>
       }
-      subtitle="Freezer, forno e máquina não param, e a RGE reajustou a tarifa de novo em junho. Com energia solar por assinatura, regulada pela Lei 14.300, o desconto vem sem placa e sem obra."
+      subtitle="Freezer, forno, ar-condicionado e máquina não param, e a RGE reajustou a tarifa em junho. Com energia solar por assinatura, regulada pela Lei 14.300, o desconto vem sem placa e sem obra."
       cta="Simular a economia da empresa"
       points={[
         { icon: "wrench", text: "Sem obra" },
