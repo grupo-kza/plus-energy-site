@@ -89,18 +89,18 @@ export function EmpresasClient() {
       bg="/images/solar-farm-bg.jpg"
       title={
         <>
-          Energia é custo fixo do teu negócio.{" "}
-          <span className="text-pe-solar-400">Dá para cortar sem obra e sem parar a loja.</span>
+          A conta de luz come o lucro da tua empresa todo mês.{" "}
+          <span className="text-pe-solar-400">Dá para pagar até 25% menos pela energia, sem desligar nada.</span>
         </>
       }
-      subtitle="Energia solar por assinatura para empresas com conta RGE no RS."
-      cta="Ver se minha empresa é elegível"
+      subtitle="A RGE reajustou a tarifa em junho. Com energia solar por assinatura, regulada pela Lei 14.300, o desconto vale sobre a energia consumida e vem sem placa e sem obra."
+      cta="Simular a economia da empresa"
       points={[
         { icon: "wrench", text: "Sem obra" },
         { icon: "ban", text: "Sem taxa de adesão" },
         { icon: "unlock", text: "Sem multa após 90 dias" },
       ]}
-      closing="Veja se a conta da sua empresa entra"
+      closing="Veja se a conta da tua empresa entra"
     >
       <section className="bg-pe-slate-50 px-4 py-16">
         <div className="mx-auto max-w-4xl">
