@@ -90,7 +90,7 @@ export function EmpresasClient() {
       title={
         <>
           A tua empresa recebe energia da RGE?{" "}
-          <span className="text-pe-solar-400">Ela pode pagar até 25% menos pela energia.</span>
+          <span className="text-pe-solar-400">Ela pode pagar até 25% menos pela energia que consome.</span>
         </>
       }
       subtitle="Energia solar por assinatura, regulada pela Lei 14.300. Sem placa, sem obra e sem parar a operação."
@@ -100,7 +100,7 @@ export function EmpresasClient() {
         { icon: "ban", text: "Sem taxa de adesão" },
         { icon: "unlock", text: "Sem multa após 90 dias" },
       ]}
-      closing="Veja se a conta da sua empresa entra"
+      closing="Veja se a conta da tua empresa entra"
     >
       <section className="bg-pe-slate-50 px-4 py-16">
         <div className="mx-auto max-w-4xl">
