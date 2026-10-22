@@ -150,7 +150,6 @@ function buildQualifiedMessage(q: WaQualified, ref: string): string {
     if (q.segmento) parts.push(`Segmento: ${q.segmento}.`);
     parts.push(`Faixa da conta: ${q.faixa} por mês.`);
     parts.push(`Cidade: ${q.cidade}.`);
-    parts.push("A conta está no CNPJ.");
     if (q.mediaTensao) {
       parts.push("Tem cabine ou transformador próprio: média tensão, falar com consultor.");
     }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState, useCallback } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 import { BillSlider } from "@/components/lead/BillSlider";
@@ -9,20 +8,14 @@ import { NotEligibleScreen } from "@/components/lead/NotEligibleScreen";
 import { DEFAULT_BILL, MIN_QUALIFIED_BILL } from "@/lib/constants";
 import { useWhatsAppLink } from "@/lib/useWhatsAppLink";
 import { trackLeadQualificado, trackWhatsAppClick } from "@/lib/gtm";
-import {
-  EMPRESA_BANDS,
-  EMPRESA_SEGMENTS,
-  casaFaixa,
-  cleanCity,
-  type EmpresaBand,
-  type EmpresaSegment,
-} from "@/lib/qualify";
+import { EMPRESA_BANDS, casaFaixa, cleanCity, type EmpresaBand } from "@/lib/qualify";
 import type { WaQualified } from "@/lib/whatsapp";
 
 type Flow = "casa" | "empresa";
 
 type CasaStep = "conta" | "local" | "titular" | "ciencia";
-type EmpresaStep = "negocio" | "conta" | "cnpj" | "cabine" | "local";
+// Empresa em 2 etapas (22/10/2026): segmento, CNPJ e média tensão a IA pergunta no WhatsApp.
+type EmpresaStep = "conta" | "local";
 type Step = CasaStep | EmpresaStep;
 
 type Outcome =
@@ -32,25 +25,24 @@ type Outcome =
 type BlockReason =
   | "conta_baixa"
   | "fora_rge"
-  | "nao_titular"
-  | "sem_cnpj";
+  | "nao_titular";
 
 /** Espaço não separável entre "R$" e o valor, só para exibição. */
 const nb = (t: string) => t.replace(/R\$ /g, "R$\u00a0");
 
 const CASA_STEPS: CasaStep[] = ["conta", "local", "titular", "ciencia"];
-const EMPRESA_STEPS: EmpresaStep[] = ["negocio", "conta", "cnpj", "cabine", "local"];
+const EMPRESA_STEPS: EmpresaStep[] = ["conta", "local"];
 
 const TITLES: Record<Step, string> = {
-  // casa
   conta: "Quanto tu pagas de luz?",
   local: "Onde fica a conta?",
   titular: "A conta está no teu nome?",
   ciencia: "Sobre a titularidade",
-  // empresa
-  negocio: "Qual o tipo de negócio?",
-  cnpj: "A conta está no CNPJ?",
-  cabine: "Tem cabine ou transformador próprio?",
+};
+
+const EMPRESA_TITLES: Partial<Record<Step, string>> = {
+  conta: "Quanto a empresa paga de luz?",
+  local: "Onde fica a empresa?",
 };
 
 const optionBase =
@@ -76,20 +68,17 @@ export function QualifyModal({ flow, open, onClose }: QualifyModalProps) {
   // respostas
   const [bill, setBill] = useState(DEFAULT_BILL);
   const [band, setBand] = useState<EmpresaBand | null>(null);
-  const [segment, setSegment] = useState<EmpresaSegment | null>(null);
   const [city, setCity] = useState("");
-  const [hasCabine, setHasCabine] = useState<boolean | null>(null);
 
   const step = steps[stepIndex];
+  const stepTitle = (flow === "empresa" && EMPRESA_TITLES[step]) || TITLES[step];
 
   const reset = useCallback(() => {
     setStepIndex(0);
     setOutcome(null);
     setBill(DEFAULT_BILL);
     setBand(null);
-    setSegment(null);
     setCity("");
-    setHasCabine(null);
   }, []);
 
   // trava o scroll e fecha com Esc
@@ -123,10 +112,7 @@ export function QualifyModal({ flow, open, onClose }: QualifyModalProps) {
   const block = (reason: BlockReason) => setOutcome({ kind: "blocked", reason });
 
   /** Fecha o filtro: monta a mensagem e libera a tela do WhatsApp. */
-  function finish(opts: {
-    titularidadeEntender?: boolean;
-    mediaTensao?: boolean;
-  }) {
+  function finish(opts: { titularidadeEntender?: boolean }) {
     const cidade = cleanCity(city);
     if (flow === "casa") {
       const faixa = casaFaixa(bill);
@@ -147,24 +133,13 @@ export function QualifyModal({ flow, open, onClose }: QualifyModalProps) {
       // Faixa de R$ 400 a R$ 999 segue para o WhatsApp, mas abaixo do corte
       // de empresa não é lead qualificado: não dispara evento de mídia.
       if (band!.id !== "400a999") {
-        trackLeadQualificado({
-          publico: "empresa",
-          faixaConta: faixa,
-          segmento: segment!.label,
-          mediaTensao: opts.mediaTensao,
-        });
+        trackLeadQualificado({ publico: "empresa", faixaConta: faixa, segmento: "nao_informado" });
       }
       setOutcome({
         kind: "done",
         billSample: band!.sample,
-        waSegment: segment!.wa,
-        qualified: {
-          tipo: "empresa",
-          faixa,
-          cidade,
-          segmento: segment!.label,
-          mediaTensao: opts.mediaTensao,
-        },
+        waSegment: "pj",
+        qualified: { tipo: "empresa", faixa, cidade },
       });
     }
   }
@@ -209,7 +184,7 @@ export function QualifyModal({ flow, open, onClose }: QualifyModalProps) {
                       </button>
                     )}
                     <h2 className="font-heading font-bold text-lg text-pe-slate-900 leading-tight">
-                      {TITLES[step]}
+                      {stepTitle}
                     </h2>
                   </div>
                   <button
@@ -284,7 +259,7 @@ export function QualifyModal({ flow, open, onClose }: QualifyModalProps) {
                         cityOk={cityOk}
                         onRge={() => {
                           if (flow === "casa") next();
-                          else finish({ mediaTensao: hasCabine === true });
+                          else finish({});
                         }}
                         onOther={() => block("fora_rge")}
                         note={
@@ -336,26 +311,9 @@ export function QualifyModal({ flow, open, onClose }: QualifyModalProps) {
                     )}
 
                     {/* ───── EMPRESA ───── */}
-                    {flow === "empresa" && step === "negocio" && (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {EMPRESA_SEGMENTS.map((s) => (
-                          <button
-                            key={s.id}
-                            className={`${optionBase} ${optionIdle} ${s.id === "outro" ? "sm:col-span-2" : ""}`}
-                            onClick={() => {
-                              setSegment(s);
-                              next();
-                            }}
-                          >
-                            {s.label}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-
                     {flow === "empresa" && step === "conta" && (
                       <>
-                        <p className="text-sm text-pe-slate-600 mb-4">Valor médio da conta de luz por mês:</p>
+                        <p className="text-sm text-pe-slate-600 mb-4">Valor médio por mês, pode ser aproximado:</p>
                         <div className="space-y-3">
                           {EMPRESA_BANDS.map((b) => (
                             <button
@@ -370,52 +328,6 @@ export function QualifyModal({ flow, open, onClose }: QualifyModalProps) {
                               {nb(b.label)}
                             </button>
                           ))}
-                        </div>
-                      </>
-                    )}
-
-                    {flow === "empresa" && step === "cnpj" && (
-                      <div className="space-y-3">
-                        <button
-                          className={`${optionBase} ${optionIdle}`}
-                          onClick={() => next()}
-                        >
-                          Sim, está no CNPJ da empresa
-                        </button>
-                        <button
-                          className={`${optionBase} ${optionIdle}`}
-                          onClick={() => block("sem_cnpj")}
-                        >
-                          Não, está em outro nome
-                        </button>
-                      </div>
-                    )}
-
-                    {flow === "empresa" && step === "cabine" && (
-                      <>
-                        <p className="text-sm text-pe-slate-600 mb-4">
-                          Se o terreno tem cabine ou transformador teu, a conta costuma ser de média tensão.
-                          Sem problema, só muda quem conversa contigo.
-                        </p>
-                        <div className="space-y-3">
-                          <button
-                            className={`${optionBase} ${optionIdle}`}
-                            onClick={() => {
-                              setHasCabine(false);
-                              next();
-                            }}
-                          >
-                            Não tenho
-                          </button>
-                          <button
-                            className={`${optionBase} ${optionIdle}`}
-                            onClick={() => {
-                              setHasCabine(true);
-                              next();
-                            }}
-                          >
-                            Sim, tenho
-                          </button>
                         </div>
                       </>
                     )}
@@ -509,25 +421,6 @@ function BlockedView({ reason, onClose }: { reason: BlockReason; onClose: () => 
         title="Quem assina precisa ser o titular"
         message="Como a titularidade da conta passa para a Plus Energy por contrato, quem assina precisa ser o titular. Peça para a pessoa que tem a conta no nome fazer essa verificação."
         action={<div className="mb-6" />}
-      />
-    );
-  }
-
-  if (reason === "sem_cnpj") {
-    return (
-      <NotEligibleScreen
-        onClose={onClose}
-        title="Aqui é para conta no CNPJ"
-        message="Esta verificação vale para contas em nome da empresa. Se a conta está no CPF de uma pessoa, o caminho é o de casa."
-        action={
-          <Link
-            href="/casa"
-            onClick={onClose}
-            className="mb-4 flex w-full items-center justify-center rounded-xl bg-[#15803D] hover:bg-[#166534] py-3.5 px-6 font-heading font-bold text-white transition"
-          >
-            Verificar como pessoa física
-          </Link>
-        }
       />
     );
   }

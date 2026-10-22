@@ -30,23 +30,6 @@ export const EMPRESA_BANDS: EmpresaBand[] = [
   { id: "10000mais", label: "R$ 10.000 ou mais", sample: 10000 },
 ];
 
-export interface EmpresaSegment {
-  id: string;
-  label: string;
-  /** Segmento do WhatsApp builder (condomínio tem abertura própria). */
-  wa: "pj" | "condominio";
-}
-
-export const EMPRESA_SEGMENTS: EmpresaSegment[] = [
-  { id: "comercio", label: "Comércio", wa: "pj" },
-  { id: "restaurante_padaria", label: "Restaurante ou padaria", wa: "pj" },
-  { id: "mercado", label: "Mercado", wa: "pj" },
-  { id: "industria", label: "Indústria", wa: "pj" },
-  { id: "clinica_escritorio", label: "Clínica ou escritório", wa: "pj" },
-  { id: "condominio", label: "Condomínio", wa: "condominio" },
-  { id: "outro", label: "Outro", wa: "pj" },
-];
-
 /** Limpa o texto livre da cidade antes de ir para a mensagem. */
 export function cleanCity(raw: string): string {
   return raw.replace(/[\u0000-\u001f]/g, " ").replace(/\s+/g, " ").trim().slice(0, 60);
