@@ -89,11 +89,11 @@ export function EmpresasClient() {
       bg="/images/solar-farm-bg.jpg"
       title={
         <>
-          Teu negócio não pode desligar a luz.{" "}
-          <span className="text-pe-solar-400">Mas pode pagar até 25% menos pela energia que consome.</span>
+          A conta de luz come o lucro da tua empresa todo mês.{" "}
+          <span className="text-pe-solar-400">Dá para pagar até 25% menos pela energia, sem desligar nada.</span>
         </>
       }
-      subtitle="Freezer, forno, ar-condicionado e máquina não param, e a RGE reajustou a tarifa em junho. Com energia solar por assinatura, regulada pela Lei 14.300, o desconto vem sem placa e sem obra."
+      subtitle="A RGE reajustou a tarifa em junho. Com energia solar por assinatura, regulada pela Lei 14.300, o desconto vale sobre a energia consumida e vem sem placa e sem obra."
       cta="Simular a economia da empresa"
       points={[
         { icon: "wrench", text: "Sem obra" },
