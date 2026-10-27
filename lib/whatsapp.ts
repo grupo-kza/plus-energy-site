@@ -110,8 +110,10 @@ export function billBucket(billValue?: number): string {
 
 function buildRef(params: WaLinkParams, withUtm: boolean): string {
   const parts = [params.origin, params.segment ?? "pf", billBucket(params.billValue)];
-  const campaign = withUtm ? getUtms().utm_campaign : undefined;
-  if (campaign) parts.push(campaign.slice(0, 24));
+  const utms: Record<string, string> = withUtm ? getUtms() : {};
+  if (utms.utm_campaign) parts.push(utms.utm_campaign.slice(0, 24));
+  // Nome do anúncio ({{ad.name}}): é o que liga a conversa ao criativo no CRM
+  if (utms.utm_content) parts.push(utms.utm_content.slice(0, 48));
   return parts.join("-");
 }
 

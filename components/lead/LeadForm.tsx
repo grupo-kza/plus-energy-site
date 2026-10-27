@@ -31,8 +31,9 @@ export function LeadForm({ onSubmit, isLoading }: LeadFormProps) {
     async (e: React.FormEvent) => {
       e.preventDefault();
       const digits = phone.replace(/\D/g, "");
-      if (digits.length < 10) {
-        setError("Informe um WhatsApp válido");
+      // DDD + 9 + 8 dígitos: o número precisa existir no WhatsApp para a conversa abrir
+      if (!/^\d{2}9\d{8}$/.test(digits)) {
+        setError("Informe o WhatsApp com DDD, começando pelo 9");
         return;
       }
       setError("");

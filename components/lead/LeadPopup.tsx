@@ -10,6 +10,7 @@ import { SuccessScreen } from "./SuccessScreen";
 import { NotEligibleScreen } from "./NotEligibleScreen";
 import { DEFAULT_BILL, MIN_QUALIFIED_BILL, COMPANY } from "@/lib/constants";
 import { trackPopupOpen, trackPopupClose, trackLeadStep, trackLeadSubmit, trackLeadSuccess } from "@/lib/gtm";
+import { getUtms } from "@/lib/whatsapp";
 
 type Step = "slider" | "discount" | "distributor" | "form" | "success" | "not_eligible";
 
@@ -115,6 +116,7 @@ export function LeadPopup() {
             distributor,
             estimatedDiscount,
             source: "website-popup",
+            ...getUtms(),
             timestamp: new Date().toISOString(),
           }),
         });
