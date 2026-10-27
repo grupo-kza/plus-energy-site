@@ -33,7 +33,7 @@ export function LeadForm({ onSubmit, isLoading }: LeadFormProps) {
       const digits = phone.replace(/\D/g, "");
       // DDD + 9 + 8 dígitos: o número precisa existir no WhatsApp para a conversa abrir
       if (!/^\d{2}9\d{8}$/.test(digits)) {
-        setError("Informe o WhatsApp com DDD, começando pelo 9");
+        setError("Informe o celular com DDD, ex.: (54) 99999-9999");
         return;
       }
       setError("");
