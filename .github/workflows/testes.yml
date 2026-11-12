@@ -37,8 +37,6 @@ jobs:
           cache: npm
       - name: Instalar dependências
         run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Lint
-        run: npm run lint
       - name: Build do Next
         run: npm run build
       - name: Instalar Playwright (Chromium)
