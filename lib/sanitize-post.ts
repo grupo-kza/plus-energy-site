@@ -12,8 +12,9 @@ const OPCOES: sanitizeHtml.IOptions = {
     "table", "thead", "tbody", "tfoot", "tr", "th", "td", "caption", "span", "div", "sup", "sub", "mark",
   ],
   allowedAttributes: {
-    "*": ["id", "class"],
-    a: ["href", "title", "target", "rel"],
+    // id só nos títulos (o sumário usa); class só no link (o link interno usa).
+    h1: ["id"], h2: ["id"], h3: ["id"], h4: ["id"], h5: ["id"], h6: ["id"],
+    a: ["href", "title", "target", "rel", "class"],
     img: ["src", "alt", "title", "width", "height", "loading"],
     th: ["colspan", "rowspan", "scope"],
     td: ["colspan", "rowspan"],

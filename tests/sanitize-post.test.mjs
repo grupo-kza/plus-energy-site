@@ -37,3 +37,16 @@ test("JSON-LD não fecha a tag script", () => {
   assert.ok(!out.includes("</script"), out);
   assert.deepEqual(JSON.parse(out), { headline: '</script><script>alert(1)</script>' });
 });
+
+test("mantém o link interno relativo que o site injeta", () => {
+  const limpo = sanitizePostHtml('<p><a href="/como-funciona" title="Como funciona" class="text-pe-green-600 font-semibold hover:underline">veja</a></p>');
+  assert.ok(limpo.includes('href="/como-funciona"'), limpo);
+  assert.ok(limpo.includes('class="text-pe-green-600 font-semibold hover:underline"'), limpo);
+});
+
+test("class e id fora do lugar saem (sem sobreposição nem id duplicado)", () => {
+  const limpo = sanitizePostHtml('<div class="fixed inset-0 z-50">x</div><p id="mid-cta-button">y</p><h2 id="ok">t</h2>');
+  assert.ok(!limpo.includes("fixed inset-0"), limpo);
+  assert.ok(!limpo.includes("mid-cta-button"), limpo);
+  assert.ok(limpo.includes('id="ok"'), limpo);
+});
