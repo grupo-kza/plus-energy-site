@@ -37,6 +37,8 @@ jobs:
           cache: npm
       - name: Instalar dependências
         run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Blog sanitizado (PUB-01, sem rede)
+        run: node --experimental-strip-types --test tests/sanitize-post.test.mjs
       - name: Supabase falso (o build pré-renderiza o /blog e consulta a API)
         run: |
           cat > "$RUNNER_TEMP/supabase-falso.py" <<'FALSO_EOF'
