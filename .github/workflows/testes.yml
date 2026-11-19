@@ -60,6 +60,9 @@ jobs:
       - name: Build do Next
         run: npm run build
       - name: Instalar Playwright (Chromium)
+        env:
+          # o runner da casa virou Ubuntu 26.04, que o Playwright 1.52 não conhece: instala como 24.04
+          PLAYWRIGHT_HOST_PLATFORM_OVERRIDE: ubuntu24.04-x64
         run: |
           mkdir -p "$RUNNER_TEMP/pw"
           cd "$RUNNER_TEMP/pw"
@@ -68,6 +71,7 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Fumaça com Playwright
         env:
+          PLAYWRIGHT_HOST_PLATFORM_OVERRIDE: ubuntu24.04-x64
           BASE_URL: http://127.0.0.1:4173
           SMOKE_PATHS: "/,/sobre,/faq,/contato"
           SMOKE_EXPECT: "plus"
