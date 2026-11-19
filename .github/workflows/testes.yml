@@ -21,7 +21,7 @@ jobs:
   testes:
     name: Testes
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04  # fixo: o ubuntu-latest virou 26.04, que o Playwright 1.52 não instala
     timeout-minutes: 25
     env:
       NEXT_TELEMETRY_DISABLED: "1"
@@ -37,6 +37,8 @@ jobs:
           cache: npm
       - name: Instalar dependências
         run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Blog sanitizado (PUB-01, sem rede)
+        run: node --experimental-strip-types --test tests/sanitize-post.test.mjs
       - name: Supabase falso (o build pré-renderiza o /blog e consulta a API)
         run: |
           cat > "$RUNNER_TEMP/supabase-falso.py" <<'FALSO_EOF'
@@ -112,7 +114,7 @@ jobs:
     name: Portão final
     if: always()
     needs: [testes]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04  # fixo: o ubuntu-latest virou 26.04, que o Playwright 1.52 não instala
     timeout-minutes: 2
     steps:
       - name: Resultado

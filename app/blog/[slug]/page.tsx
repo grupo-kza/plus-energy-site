@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getBlogPost, getRelatedPosts } from "@/lib/supabase";
 import { PostContent } from "@/app/blog/[slug]/PostContent";
 import { injectInternalLinks } from "@/lib/internal-links";
+import { jsonLdSeguro, sanitizePostHtml } from "@/lib/sanitize-post";
 
 export const revalidate = 60;
 
@@ -40,7 +41,8 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   // Injetar links internos automaticamente no conteúdo
   if (post.content) {
-    post.content = injectInternalLinks(post.content, slug);
+    // PUB-01 (#994): o HTML do banco passa pela lista do que um artigo pode ter
+    post.content = sanitizePostHtml(injectInternalLinks(post.content, slug));
   }
 
   // JSON-LD structured data
@@ -117,16 +119,16 @@ export default async function BlogPostPage({ params }: PageProps) {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdSeguro(jsonLd) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdSeguro(breadcrumbJsonLd) }}
       />
       {faqJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdSeguro(faqJsonLd) }}
         />
       )}
       <PostContent post={post} relatedPosts={relatedPosts} />
